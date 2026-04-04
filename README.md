@@ -114,16 +114,16 @@ http://127.0.0.1:5000
 - BMI and calorie estimation
 - Daily wellness checklist
 - Notification-based reminder system
-<!-- 
+
 ### 📊 Analytics
 - Feature importance chart
 - Model comparison metrics
 - Distribution charts
 - Correlation heatmap
-- Lifestyle and fitness-level breakdowns -->
+- Lifestyle and fitness-level breakdowns
 
 ## 📁 Key Files
-
+<!-- 
 - `app.py` — Flask entrypoint and route definitions
 - `services/prediction_service.py` — model loading, prediction orchestration, analytics payload generation
 - `validators.py` — request validation for prediction input
@@ -131,7 +131,7 @@ http://127.0.0.1:5000
 - `templates/` — Jinja templates for all app pages
 - `static/style.css` — shared visual system and responsive UI styling
 - `static/script.js` — shared interactions, reveal logic, tilt, parallax, and UI helpers
-- `model/metadata.json` — analytics/model metadata used by the frontend
+- `model/metadata.json` — analytics/model metadata used by the frontend -->
 
 ## 📊 Dataset
 
