@@ -114,13 +114,13 @@ http://127.0.0.1:5000
 - BMI and calorie estimation
 - Daily wellness checklist
 - Notification-based reminder system
-
+<!-- 
 ### 📊 Analytics
 - Feature importance chart
 - Model comparison metrics
 - Distribution charts
 - Correlation heatmap
-- Lifestyle and fitness-level breakdowns
+- Lifestyle and fitness-level breakdowns -->
 
 ## 📁 Key Files
 
