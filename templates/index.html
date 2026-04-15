@@ -2,29 +2,48 @@
 {% block title %}Kinetic Ether | Fitness Habit Analyzer{% endblock %}
 {% block body_class %}page-home{% endblock %}
 {% block content %}
-<section class="page-hero" data-reveal>
+<section class="page-hero page-hero--cinematic" data-reveal>
   <div class="hero-grid">
     <div>
       <div class="page-eyebrow">AI fitness intelligence</div>
+      <div class="hero-marquee">
+        <span>Scroll for depth</span>
+        <span>Product showcase</span>
+        <span>Prediction engine unchanged</span>
+      </div>
       <h1 class="hero-title">
-        From raw workout signals to a scroll-driven story about how you train.
+        From raw workout signals to a premium 3D story about how you train.
       </h1>
       <p class="hero-copy">
-        Kinetic Ether turns biometrics, recovery patterns, and session habits into a cinematic decision layer. Preserve the current machine learning workflow, but present it like a premium fitness command system.
+        Kinetic Ether turns biometrics, recovery patterns, and session habits into a cinematic decision layer. The frontend now behaves like a fitness-tech product launch with layered motion, deliberate depth, and clearer decision storytelling.
       </p>
       <div class="hero-actions">
-        <a href="/dashboard" class="cta-primary">Open prediction lab</a>
-        <a href="/analytics" class="cta-secondary">Explore model depth</a>
+        <a href="/dashboard" class="cta-primary" data-magnetic>Open prediction lab</a>
+        <a href="/analytics" class="cta-secondary" data-magnetic>Explore model depth</a>
       </div>
       <div class="pill-row mt-8">
         <div class="metric-pill">Real-time scoring</div>
         <div class="metric-pill">Lifestyle clustering</div>
         <div class="metric-pill">Progress memory</div>
       </div>
+      <div class="hero-command-grid mt-8">
+        <div class="hero-command-card" data-scroll-card>
+          <span>Command mode</span>
+          <strong>Realtime guidance</strong>
+          <p>Prediction results animate into an operator-style summary instead of static readouts.</p>
+        </div>
+        <div class="hero-command-card" data-scroll-card>
+          <span>Depth layers</span>
+          <strong>Parallax storytelling</strong>
+          <p>Each section now moves through foreground, midground, and backdrop planes during scroll.</p>
+        </div>
+      </div>
     </div>
     <div class="signal-scene signal-scene--home" data-signal-scene data-reveal-delay="120">
       <div class="signal-scene__ambient"></div>
       <div class="signal-scene__grid"></div>
+      <div class="hero-depth-ribbon hero-depth-ribbon--a" data-depth="0.03"></div>
+      <div class="hero-depth-ribbon hero-depth-ribbon--b" data-depth="0.06"></div>
       <div class="signal-home__orbit signal-home__orbit--outer"></div>
       <div class="signal-home__orbit signal-home__orbit--mid"></div>
       <div class="signal-home__orbit signal-home__orbit--inner"></div>
@@ -51,7 +70,7 @@
   </div>
 </section>
 
-<section class="stats-row">
+<section class="stats-row stats-row--elevated">
   <article class="metric-panel" data-reveal data-scroll-card>
     <div class="metric-kicker">Prediction stack</div>
     <div class="metric-value metric-value--cyan">03</div>
@@ -74,7 +93,7 @@
   </article>
 </section>
 
-<section class="story-panel" data-reveal>
+<section class="story-panel story-panel--deep" data-reveal>
   <div class="section-head">
     <div>
       <div class="section-tag">Scroll narrative</div>
@@ -120,8 +139,8 @@
   </div>
 </section>
 
-<section class="story-grid" style="grid-template-columns: 1.05fr 0.95fr;">
-  <article class="story-stage" data-story-pin data-reveal>
+<section class="story-grid story-grid--immersive" style="grid-template-columns: 1.05fr 0.95fr;">
+  <article class="story-stage story-stage--immersive" data-story-pin data-reveal>
     <div class="section-tag">3D scroll depth</div>
     <h2 class="section-title">A layered scene built for depth, not decoration.</h2>
     <p class="section-copy">Use selective 3D motion in the hero and storytelling sections so the interface feels dimensional without becoming heavy.</p>
@@ -152,7 +171,7 @@
       </div>
     </div>
   </article>
-  <div class="dashboard-stack">
+  <div class="dashboard-stack dashboard-stack--spotlight">
     <article class="spotlight-card" data-reveal data-scroll-card data-tilt>
       <div class="section-tag">Dashboard</div>
       <h3 class="timeline-card__title">Prediction lab</h3>
@@ -174,7 +193,33 @@
   </div>
 </section>
 
-<section class="page-hero" data-reveal>
+<section class="story-showcase" data-reveal>
+  <div class="section-head">
+    <div>
+      <div class="section-tag">Immersive sequence</div>
+      <h2 class="section-title">Pinned, layered sections turn the product into a guided tour.</h2>
+    </div>
+  </div>
+  <div class="story-showcase__grid">
+    <article class="depth-card depth-card--wide" data-scroll-card data-tilt>
+      <span class="depth-card__eyebrow">Hero engine</span>
+      <strong class="depth-card__title">Foreground metrics, floating labels, and orbit motion</strong>
+      <p class="depth-card__copy">The landing experience combines controlled parallax, scene tilt, and staged copy reveals to create a premium first impression.</p>
+    </article>
+    <article class="depth-card" data-scroll-card data-tilt>
+      <span class="depth-card__eyebrow">Cockpit</span>
+      <strong class="depth-card__title">Dashboard as a realtime command center</strong>
+      <p class="depth-card__copy">Summary strips, animated score core, and planner panels present the existing payload as a mission console.</p>
+    </article>
+    <article class="depth-card" data-scroll-card data-tilt>
+      <span class="depth-card__eyebrow">Progress arc</span>
+      <strong class="depth-card__title">Saved predictions become a visible long-term narrative</strong>
+      <p class="depth-card__copy">Charts, timelines, and deltas emphasize momentum rather than raw storage records.</p>
+    </article>
+  </div>
+</section>
+
+<section class="page-hero page-hero--compact" data-reveal>
   <div class="section-head">
     <div>
       <div class="section-tag">Transformation loop</div>
