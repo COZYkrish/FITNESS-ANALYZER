@@ -3,16 +3,23 @@
 {% block body_class %}page-health{% endblock %}
 {% block content %}
 <div class="health-shell">
-  <section class="page-hero" data-reveal>
+  <section class="page-hero page-hero--cinematic" data-reveal>
     <div class="hero-grid">
       <div>
         <div class="page-eyebrow">Recovery and daily habits</div>
+        <div class="hero-marquee">
+          <span>Hydration memory</span>
+          <span>Recovery dashboard</span>
+          <span>Same browser storage</span>
+        </div>
         <h1 class="page-title">Turn daily health checks into a visible readiness story.</h1>
         <p class="page-copy">Water tracking, BMI checks, checklist completion, and reminders keep the same browser-side logic and storage keys while gaining stronger visual feedback.</p>
       </div>
       <div class="signal-scene signal-scene--health" data-signal-scene data-reveal-delay="120">
         <div class="signal-scene__ambient"></div>
         <div class="signal-scene__grid"></div>
+        <div class="hero-depth-ribbon hero-depth-ribbon--a" data-depth="0.03"></div>
+        <div class="hero-depth-ribbon hero-depth-ribbon--b" data-depth="0.06"></div>
         <div class="signal-health__scan signal-health__scan--top"></div>
         <div class="signal-health__scan signal-health__scan--bottom"></div>
         <div class="signal-health__spine"></div>
@@ -27,6 +34,19 @@
         <div class="signal-scene__label signal-scene__label--c"><span>Readiness</span><strong>Calm signal</strong></div>
       </div>
     </div>
+  </section>
+
+  <section class="dashboard-ribbon" data-reveal>
+    <article class="dashboard-ribbon__card" data-scroll-card>
+      <span>Hydration loop</span>
+      <strong>Daily intake becomes a visual readiness signal</strong>
+      <p>The water tracker now feels like a live module instead of a simple utility panel.</p>
+    </article>
+    <article class="dashboard-ribbon__card" data-scroll-card>
+      <span>Daily discipline</span>
+      <strong>Checklist and reminders framed as coaching cues</strong>
+      <p>All browser-side functionality stays intact while the presentation becomes more immersive.</p>
+    </article>
   </section>
 
   <section class="grid gap-6 xl:grid-cols-12">
@@ -123,6 +143,21 @@
           <button onclick="requestNotifPermission()" class="rounded-2xl border border-cyan-400/30 px-4 py-3 text-sm text-cyan-200">Enable Notifications</button>
           <button onclick="testReminderNow()" class="rounded-2xl border border-fuchsia-400/30 px-4 py-3 text-sm text-fuchsia-200">Test Reminder</button>
         </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="story-showcase" data-reveal>
+    <div class="story-showcase__grid">
+      <article class="depth-card depth-card--wide" data-scroll-card data-tilt>
+        <span class="depth-card__eyebrow">Readiness layer</span>
+        <strong class="depth-card__title">Health tools now read like one connected recovery system</strong>
+        <p class="depth-card__copy">Hydration, BMI, checklist completion, and reminders share the same visual language and motion rhythm while preserving every existing key and handler.</p>
+      </article>
+      <article class="depth-card" data-scroll-card data-tilt>
+        <span class="depth-card__eyebrow">Usability</span>
+        <strong class="depth-card__title">Form clarity remains intact</strong>
+        <p class="depth-card__copy">Inputs stay obvious and accessible even with the more cinematic shell.</p>
       </article>
     </div>
   </section>
