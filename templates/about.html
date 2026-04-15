@@ -3,10 +3,15 @@
 {% block body_class %}page-about{% endblock %}
 {% block content %}
 <div class="about-shell">
-  <section class="page-hero" data-reveal>
+  <section class="page-hero page-hero--cinematic" data-reveal>
     <div class="hero-grid">
       <div>
         <div class="page-eyebrow">Product architecture</div>
+        <div class="hero-marquee">
+          <span>Flask preserved</span>
+          <span>Model logic unchanged</span>
+          <span>Frontend reimagined</span>
+        </div>
         <h1 class="page-title">Three model views, one fitness intelligence story.</h1>
         <p class="page-copy">This frontend now explains the platform like a product narrative while the Flask routes, model assets, prediction service, analytics payload, and browser-side tools remain unchanged.</p>
         <div class="pill-row mt-8">
@@ -18,6 +23,8 @@
       <div class="signal-scene signal-scene--about" data-signal-scene data-reveal-delay="120">
         <div class="signal-scene__ambient"></div>
         <div class="signal-scene__grid"></div>
+        <div class="hero-depth-ribbon hero-depth-ribbon--a" data-depth="0.03"></div>
+        <div class="hero-depth-ribbon hero-depth-ribbon--b" data-depth="0.06"></div>
         <div class="signal-about__rail signal-about__rail--h"></div>
         <div class="signal-about__rail signal-about__rail--v"></div>
         <div class="signal-about__block signal-about__block--backend"></div>
@@ -29,6 +36,19 @@
         <div class="signal-scene__label signal-scene__label--c"><span>Frontend</span><strong>Client shell</strong></div>
       </div>
     </div>
+  </section>
+
+  <section class="dashboard-ribbon" data-reveal>
+    <article class="dashboard-ribbon__card" data-scroll-card>
+      <span>Architecture clarity</span>
+      <strong>Explain the system like a premium product brief</strong>
+      <p>Backend, models, and client roles stay the same but are now introduced with stronger pacing and hierarchy.</p>
+    </article>
+    <article class="dashboard-ribbon__card" data-scroll-card>
+      <span>Trust layer</span>
+      <strong>What changed is the shell, not the engine</strong>
+      <p>The page makes the frontend-only redesign explicit without touching routes, payloads, or inference logic.</p>
+    </article>
   </section>
 
   <section class="card-grid">
@@ -53,7 +73,7 @@
   </section>
 
   <section class="story-grid lg:grid-cols-2">
-    <article class="story-panel" data-reveal>
+    <article class="story-panel story-panel--deep" data-reveal>
       <div class="section-tag">Pipeline</div>
       <h2 class="section-title">How data moves through the system.</h2>
       <div class="story-timeline mt-8">
@@ -97,6 +117,21 @@
         <div class="stage-badge stage-badge--c">frontend<strong>story system</strong></div>
       </div>
     </article>
+  </section>
+
+  <section class="story-showcase" data-reveal>
+    <div class="story-showcase__grid">
+      <article class="depth-card depth-card--wide" data-scroll-card data-tilt>
+        <span class="depth-card__eyebrow">Frontend strategy</span>
+        <strong class="depth-card__title">3D storytelling wraps the existing application architecture</strong>
+        <p class="depth-card__copy">Landing, dashboard, analytics, progress, and health pages now present one cohesive product language without changing any backend code path.</p>
+      </article>
+      <article class="depth-card" data-scroll-card data-tilt>
+        <span class="depth-card__eyebrow">Maintenance</span>
+        <strong class="depth-card__title">Templates stay modular</strong>
+        <p class="depth-card__copy">The redesign remains template- and asset-driven, so the Flask layer stays isolated from presentation work.</p>
+      </article>
+    </div>
   </section>
 
   <section class="story-panel" data-reveal>
