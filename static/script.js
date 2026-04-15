@@ -59,6 +59,21 @@ function highlightNav() {
   });
 }
 
+function isPerformanceLite() {
+  const lowMemory = typeof navigator.deviceMemory === "number" && navigator.deviceMemory <= 4;
+  const lowCpu = typeof navigator.hardwareConcurrency === "number" && navigator.hardwareConcurrency <= 4;
+  return window.innerWidth <= 1100 || lowMemory || lowCpu;
+}
+
+function setupPerformanceMode() {
+  const apply = () => {
+    document.body.classList.toggle("perf-lite", isPerformanceLite());
+  };
+
+  apply();
+  window.addEventListener("resize", apply);
+}
+
 function setupViewportProgress() {
   const bar = document.getElementById("viewport-progress-bar");
   if (!bar) return;
@@ -107,7 +122,7 @@ function setupRevealAnimations() {
 }
 
 function setupTilt() {
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || document.body.classList.contains("perf-lite")) return;
   document.querySelectorAll("[data-tilt]").forEach((el) => {
     el.addEventListener("mousemove", (event) => {
       if (window.innerWidth < 900) return;
@@ -124,7 +139,7 @@ function setupTilt() {
 }
 
 function setupMagneticButtons() {
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || document.body.classList.contains("perf-lite")) return;
 
   document.querySelectorAll("[data-magnetic]").forEach((el) => {
     el.addEventListener("mousemove", (event) => {
@@ -143,7 +158,7 @@ function setupMagneticButtons() {
 
 function setupHeroScene() {
   const visual = document.querySelector("[data-hero-visual]");
-  if (!visual || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (!visual || window.matchMedia("(prefers-reduced-motion: reduce)").matches || document.body.classList.contains("perf-lite")) return;
 
   visual.addEventListener("mousemove", (event) => {
     if (window.innerWidth < 900) return;
@@ -159,7 +174,7 @@ function setupHeroScene() {
 }
 
 function setupSignalScenes() {
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || document.body.classList.contains("perf-lite")) return;
 
   document.querySelectorAll("[data-signal-scene]").forEach((scene) => {
     const labels = scene.querySelectorAll(".signal-scene__label");
@@ -195,7 +210,7 @@ function setupSignalScenes() {
 }
 
 function setupStoryModelCursor() {
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || document.body.classList.contains("perf-lite")) return;
 
   document.querySelectorAll("[data-story-pin]").forEach((section) => {
     const stage = section.querySelector(".story-stage__layers");
@@ -269,7 +284,7 @@ function setupStoryModelCursor() {
 }
 
 function setupParallax() {
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || document.body.classList.contains("perf-lite")) return;
   const layers = document.querySelectorAll("[data-depth]");
   if (!layers.length) return;
 
@@ -294,7 +309,7 @@ function setupParallax() {
 }
 
 function setupGsapScenes() {
-  if (!window.gsap || !window.ScrollTrigger || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (!window.gsap || !window.ScrollTrigger || window.matchMedia("(prefers-reduced-motion: reduce)").matches || document.body.classList.contains("perf-lite")) return;
   gsap.registerPlugin(ScrollTrigger);
 
   document.querySelectorAll("[data-story-pin]").forEach((section) => {
@@ -365,6 +380,7 @@ function setupGsapScenes() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  setupPerformanceMode();
   highlightNav();
   setupViewportProgress();
   setupRevealAnimations();

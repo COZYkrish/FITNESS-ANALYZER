@@ -3822,6 +3822,80 @@ input[type="time"] {
   }
 }
 
+body.perf-lite .bg-gradient-orb,
+body.perf-lite .bg-halo,
+body.perf-lite .bg-rings,
+body.perf-lite .bg-noise,
+body.perf-lite .signal-scene__ambient,
+body.perf-lite .hero-depth-ribbon {
+  display: none;
+}
+
+body.perf-lite .site-header,
+body.perf-lite .site-footer,
+body.perf-lite .shell-banner__inner,
+body.perf-lite .page-hero,
+body.perf-lite .story-panel,
+body.perf-lite .story-stage,
+body.perf-lite .glass-card,
+body.perf-lite .metric-panel,
+body.perf-lite .timeline-card,
+body.perf-lite .spotlight-card,
+body.perf-lite .insight-card,
+body.perf-lite .story-showcase,
+body.perf-lite .dashboard-ribbon__card,
+body.perf-lite .signal-scene,
+body.perf-lite .signal-scene__label {
+  backdrop-filter: none !important;
+}
+
+body.perf-lite .site-header,
+body.perf-lite .page-hero,
+body.perf-lite .story-panel,
+body.perf-lite .story-stage,
+body.perf-lite .glass-card,
+body.perf-lite .metric-panel,
+body.perf-lite .timeline-card,
+body.perf-lite .spotlight-card,
+body.perf-lite .insight-card,
+body.perf-lite .story-showcase,
+body.perf-lite .dashboard-ribbon__card,
+body.perf-lite .signal-scene {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 12px 28px rgba(2, 6, 23, 0.22);
+}
+
+body.perf-lite .signal-scene::after,
+body.perf-lite .page-hero::before,
+body.perf-lite .story-panel::before,
+body.perf-lite .glass-card::before,
+body.perf-lite .metric-panel::before,
+body.perf-lite .timeline-card::before,
+body.perf-lite .spotlight-card::before,
+body.perf-lite .insight-card::before,
+body.perf-lite .story-stage::before,
+body.perf-lite .dashboard-ribbon__card::before,
+body.perf-lite .depth-card::before,
+body.perf-lite .hero-command-card::before {
+  opacity: 0.35;
+}
+
+body.perf-lite .signal-scene,
+body.perf-lite .story-stage__layers,
+body.perf-lite [data-tilt],
+body.perf-lite [data-depth] {
+  transform: none !important;
+}
+
+body.perf-lite .signal-scene {
+  transition: none;
+}
+
+body.perf-lite .bg-grid {
+  opacity: 0.16;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .viewport-progress {
     display: none;
