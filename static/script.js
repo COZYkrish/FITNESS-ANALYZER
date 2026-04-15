@@ -59,6 +59,21 @@ function highlightNav() {
   });
 }
 
+function setupViewportProgress() {
+  const bar = document.getElementById("viewport-progress-bar");
+  if (!bar) return;
+
+  const update = () => {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+    bar.style.width = `${Math.min(Math.max(pct, 0), 100)}%`;
+  };
+
+  update();
+  window.addEventListener("scroll", update, { passive: true });
+  window.addEventListener("resize", update);
+}
+
 function setupRevealAnimations() {
   const targets = document.querySelectorAll("[data-reveal]");
   if (!targets.length) return;
@@ -102,6 +117,24 @@ function setupTilt() {
       el.style.transform =
         `perspective(1200px) rotateX(${(-y * 6).toFixed(2)}deg) rotateY(${(x * 8).toFixed(2)}deg) translateY(-3px)`;
     });
+    el.addEventListener("mouseleave", () => {
+      el.style.transform = "";
+    });
+  });
+}
+
+function setupMagneticButtons() {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  document.querySelectorAll("[data-magnetic]").forEach((el) => {
+    el.addEventListener("mousemove", (event) => {
+      if (window.innerWidth < 900) return;
+      const rect = el.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width - 0.5;
+      const y = (event.clientY - rect.top) / rect.height - 0.5;
+      el.style.transform = `translate3d(${(x * 12).toFixed(1)}px, ${(y * 10).toFixed(1)}px, 0)`;
+    });
+
     el.addEventListener("mouseleave", () => {
       el.style.transform = "";
     });
@@ -240,13 +273,24 @@ function setupParallax() {
   const layers = document.querySelectorAll("[data-depth]");
   if (!layers.length) return;
 
-  window.addEventListener("scroll", () => {
-    const y = window.scrollY;
+  let ticking = false;
+  const update = () => {
     layers.forEach((layer) => {
       const depth = Number(layer.dataset.depth || 0.08);
-      layer.style.transform = `translate3d(0, ${y * depth}px, 0)`;
+      const rect = layer.parentElement?.getBoundingClientRect() || layer.getBoundingClientRect();
+      const offset = (window.innerHeight * 0.5 - rect.top) * depth;
+      layer.style.transform = `translate3d(0, ${offset.toFixed(1)}px, 0)`;
     });
+    ticking = false;
+  };
+
+  update();
+  window.addEventListener("scroll", () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
   }, { passive: true });
+  window.addEventListener("resize", update);
 }
 
 function setupGsapScenes() {
@@ -322,8 +366,10 @@ function setupGsapScenes() {
 
 document.addEventListener("DOMContentLoaded", () => {
   highlightNav();
+  setupViewportProgress();
   setupRevealAnimations();
   setupTilt();
+  setupMagneticButtons();
   setupHeroScene();
   setupSignalScenes();
   setupStoryModelCursor();
