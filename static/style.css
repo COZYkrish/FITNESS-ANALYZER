@@ -2795,3 +2795,191 @@ textarea {
     transform: none;
   }
 }
+
+/* Local utility layer replacing the runtime Tailwind CDN dependency. */
+.block { display: block; }
+.hidden { display: none !important; }
+.flex { display: flex; }
+.grid { display: grid; }
+.absolute { position: absolute; }
+.relative { position: relative; }
+.fixed { position: fixed; }
+.inset-0 { inset: 0; }
+.top-0 { top: 0; }
+.bottom-0 { bottom: 0; }
+.left-0 { left: 0; }
+.z-50 { z-index: 50; }
+.w-full { width: 100%; }
+.min-w-0 { min-width: 0; }
+.w-5 { width: 1.25rem; }
+.w-24 { width: 6rem; }
+.w-28 { width: 7rem; }
+.w-56 { width: 14rem; }
+.w-\[300px\] { width: 300px; }
+.w-\[500px\] { width: 500px; }
+.w-\[600px\] { width: 600px; }
+.h-2 { height: 0.5rem; }
+.h-3 { height: 0.75rem; }
+.h-5 { height: 1.25rem; }
+.h-16 { height: 4rem; }
+.h-20 { height: 5rem; }
+.h-56 { height: 14rem; }
+.h-64 { height: 16rem; }
+.h-72 { height: 18rem; }
+.h-80 { height: 20rem; }
+.h-96 { height: 24rem; }
+.h-\[300px\] { height: 300px; }
+.h-\[500px\] { height: 500px; }
+.h-\[600px\] { height: 600px; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.mt-0\.5 { margin-top: 0.125rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-3 { margin-top: 0.75rem; }
+.mt-4 { margin-top: 1rem; }
+.mt-5 { margin-top: 1.25rem; }
+.mt-6 { margin-top: 1.5rem; }
+.mt-8 { margin-top: 2rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.p-3 { padding: 0.75rem; }
+.p-4 { padding: 1rem; }
+.p-5 { padding: 1.25rem; }
+.p-6 { padding: 1.5rem; }
+.p-7 { padding: 1.75rem; }
+.px-2 { padding-left: 0.5rem; padding-right: 0.5rem; }
+.px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
+.px-4 { padding-left: 1rem; padding-right: 1rem; }
+.px-5 { padding-left: 1.25rem; padding-right: 1.25rem; }
+.px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+.py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
+.py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+.py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+.gap-2 { gap: 0.5rem; }
+.gap-3 { gap: 0.75rem; }
+.gap-4 { gap: 1rem; }
+.gap-6 { gap: 1.5rem; }
+.gap-8 { gap: 2rem; }
+.space-y-2 > * + * { margin-top: 0.5rem; }
+.space-y-3 > * + * { margin-top: 0.75rem; }
+.space-y-5 > * + * { margin-top: 1.25rem; }
+.space-y-6 > * + * { margin-top: 1.5rem; }
+.items-center { align-items: center; }
+.items-start { align-items: flex-start; }
+.items-end { align-items: flex-end; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.justify-around { justify-content: space-around; }
+.flex-col { flex-direction: column; }
+.flex-wrap { flex-wrap: wrap; }
+.grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.overflow-x-auto { overflow-x: auto; }
+.break-words { overflow-wrap: anywhere; word-break: break-word; }
+.rounded-xl { border-radius: 0.75rem; }
+.rounded-2xl { border-radius: 1rem; }
+.rounded-3xl { border-radius: 1.5rem; }
+.rounded-full { border-radius: 9999px; }
+.rounded-\[1\.2rem\] { border-radius: 1.2rem; }
+.rounded-\[2rem\] { border-radius: 2rem; }
+.border { border-width: 1px; border-style: solid; }
+.border-2 { border-width: 2px; border-style: solid; }
+.border-b { border-bottom-width: 1px; border-bottom-style: solid; }
+.border-t { border-top-width: 1px; border-top-style: solid; }
+.border-white { border-color: rgba(255, 255, 255, 1); }
+.border-white\/10 { border-color: rgba(255, 255, 255, 0.1); }
+.border-white\/20 { border-color: rgba(255, 255, 255, 0.2); }
+.border-cyan-400\/20 { border-color: rgba(34, 211, 238, 0.2); }
+.border-cyan-400\/30 { border-color: rgba(34, 211, 238, 0.3); }
+.border-fuchsia-400\/20 { border-color: rgba(232, 121, 249, 0.2); }
+.border-fuchsia-400\/30 { border-color: rgba(232, 121, 249, 0.3); }
+.border-lime-400\/20 { border-color: rgba(163, 230, 53, 0.2); }
+.bg-white\/5 { background: rgba(255, 255, 255, 0.05); }
+.bg-white\/10 { background: rgba(255, 255, 255, 0.1); }
+.bg-cyan-300 { background: rgb(103, 232, 249); }
+.bg-fuchsia-300 { background: rgb(240, 171, 252); }
+.bg-lime-300 { background: rgb(190, 242, 100); }
+.bg-cyan-400\/10 { background: rgba(34, 211, 238, 0.1); }
+.bg-fuchsia-400\/10 { background: rgba(232, 121, 249, 0.1); }
+.bg-lime-400\/10 { background: rgba(163, 230, 53, 0.1); }
+.bg-gradient-to-t { background-image: linear-gradient(to top, var(--tw-gradient-from), var(--tw-gradient-to)); }
+.from-cyan-400 { --tw-gradient-from: rgb(34, 211, 238); }
+.to-cyan-200 { --tw-gradient-to: rgb(165, 243, 252); }
+.text-center { text-align: center; }
+.text-xs { font-size: 0.75rem; line-height: 1rem; }
+.text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+.text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+.text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+.text-2xl { font-size: 1.5rem; line-height: 2rem; }
+.text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+.text-5xl { font-size: 3rem; line-height: 1; }
+.text-\[0\.7rem\] { font-size: 0.7rem; }
+.text-white { color: #fff; }
+.text-cyan-100 { color: rgb(207, 250, 254); }
+.text-cyan-200 { color: rgb(165, 243, 252); }
+.text-fuchsia-100 { color: rgb(250, 232, 255); }
+.text-fuchsia-200 { color: rgb(245, 208, 254); }
+.text-lime-100 { color: rgb(236, 252, 203); }
+.text-lime-200 { color: rgb(217, 249, 157); }
+.text-slate-100 { color: rgb(241, 245, 249); }
+.text-slate-200 { color: rgb(226, 232, 240); }
+.text-slate-300 { color: rgb(203, 213, 225); }
+.text-slate-400 { color: rgb(148, 163, 184); }
+.font-body { font-family: "Manrope", sans-serif; }
+.font-headline { font-family: "Sora", sans-serif; }
+.font-mono { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; }
+.font-black { font-weight: 900; }
+.font-bold { font-weight: 700; }
+.font-semibold { font-weight: 600; }
+.leading-none { line-height: 1; }
+.leading-7 { line-height: 1.75rem; }
+.uppercase { text-transform: uppercase; }
+.tracking-tighter { letter-spacing: -0.05em; }
+.tracking-widest { letter-spacing: 0.1em; }
+.tracking-\[0\.05em\] { letter-spacing: 0.05em; }
+.tracking-\[0\.16em\] { letter-spacing: 0.16em; }
+.tracking-\[0\.2em\] { letter-spacing: 0.2em; }
+.tracking-\[0\.22em\] { letter-spacing: 0.22em; }
+.tracking-\[0\.24em\] { letter-spacing: 0.24em; }
+.tracking-\[0\.28em\] { letter-spacing: 0.28em; }
+.float-right { float: right; }
+.cursor-pointer { cursor: pointer; }
+.transition-all { transition: all 0.2s ease; }
+.transition-colors { transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease; }
+.accent-cyan-300 { accent-color: rgb(103, 232, 249); }
+.accent-fuchsia-300 { accent-color: rgb(240, 171, 252); }
+.accent-lime-300 { accent-color: rgb(190, 242, 100); }
+.ring-2 { box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.08); }
+.ring-cyan-300\/50 { box-shadow: inset 0 0 0 2px rgba(103, 232, 249, 0.5); }
+
+@media (min-width: 640px) {
+  .sm\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sm\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .sm\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .sm\:col-span-2 { grid-column: span 2 / span 2; }
+}
+
+@media (min-width: 768px) {
+  .md\:flex { display: flex; }
+  .md\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+@media (min-width: 1024px) {
+  .lg\:items-center { align-items: center; }
+  .lg\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .lg\:grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+  .lg\:grid-cols-\[180px_minmax\(0\,1fr\)\] { grid-template-columns: 180px minmax(0, 1fr); }
+  .lg\:grid-cols-\[240px_1fr\] { grid-template-columns: 240px minmax(0, 1fr); }
+  .lg\:col-span-6 { grid-column: span 6 / span 6; }
+  .lg\:col-span-12 { grid-column: span 12 / span 12; }
+}
+
+@media (min-width: 1280px) {
+  .xl\:grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+  .xl\:col-span-3 { grid-column: span 3 / span 3; }
+  .xl\:col-span-4 { grid-column: span 4 / span 4; }
+  .xl\:col-span-5 { grid-column: span 5 / span 5; }
+}
+
+@media (min-width: 1536px) {
+  .\32xl\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .\32xl\:col-span-1 { grid-column: span 1 / span 1; }
+}
