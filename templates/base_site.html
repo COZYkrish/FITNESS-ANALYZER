@@ -18,9 +18,16 @@
     <div class="bg-gradient-orb orb-a"></div>
     <div class="bg-gradient-orb orb-b"></div>
     <div class="bg-gradient-orb orb-c"></div>
+    <div class="bg-halo bg-halo--a"></div>
+    <div class="bg-halo bg-halo--b"></div>
+    <div class="bg-rings"></div>
     <div class="bg-mesh"></div>
     <div class="bg-grid"></div>
     <div class="bg-noise"></div>
+  </div>
+
+  <div class="viewport-progress" aria-hidden="true">
+    <span id="viewport-progress-bar"></span>
   </div>
 
   <header class="site-header">
@@ -45,6 +52,19 @@
   </header>
 
   <main class="site-main">
+    <section class="shell-banner" data-reveal>
+      <div class="shell-banner__inner">
+        <div class="shell-banner__left">
+          <span class="shell-banner__tag">Futuristic fitness intelligence</span>
+          <p class="shell-banner__copy">Immersive frontend shell, unchanged Flask prediction core.</p>
+        </div>
+        <div class="shell-banner__right">
+          <span>Realtime scoring</span>
+          <span>Story-driven analytics</span>
+          <span>Progress memory</span>
+        </div>
+      </div>
+    </section>
     <div class="page-frame" data-page-shell>
       {% block content %}{% endblock %}
     </div>
