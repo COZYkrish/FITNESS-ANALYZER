@@ -10,12 +10,17 @@
 {% endblock %}
 {% block content %}
 <div class="dashboard-shell">
-<section class="page-hero" data-reveal>
+<section class="page-hero page-hero--cinematic" data-reveal>
   <div class="hero-grid">
     <div>
       <div class="page-eyebrow">Realtime prediction lab</div>
+      <div class="hero-marquee">
+        <span>Live model feedback</span>
+        <span>Interactive cockpit</span>
+        <span>Unchanged `/predict` contract</span>
+      </div>
       <h1 class="page-title">The fitness command center.</h1>
-      <p class="page-copy">Keep the same prediction payload, scoring engine, planner, export, and save-to-progress flow, but present them as a premium reactive cockpit.</p>
+      <p class="page-copy">Keep the same prediction payload, scoring engine, planner, export, and save-to-progress flow, but present them as a premium reactive cockpit with layered telemetry, clearer signal hierarchy, and smoother transitions.</p>
       <div class="mini-grid mt-8">
         <div class="metric-panel" data-tilt>
           <div class="metric-kicker">Core</div>
@@ -35,14 +40,16 @@
         </div>
       </div>
     </div>
-    <div class="signal-scene signal-scene--dashboard" data-signal-scene data-reveal-delay="120">
-      <div class="signal-scene__ambient"></div>
-      <div class="signal-scene__grid"></div>
-      <div class="signal-dashboard__panel signal-dashboard__panel--rear"></div>
-      <div class="signal-dashboard__panel signal-dashboard__panel--main">
-        <div class="signal-dashboard__ring"></div>
-        <div class="signal-dashboard__line">
-          <span></span><span></span><span></span><span></span><span></span>
+      <div class="signal-scene signal-scene--dashboard" data-signal-scene data-reveal-delay="120">
+        <div class="signal-scene__ambient"></div>
+        <div class="signal-scene__grid"></div>
+        <div class="hero-depth-ribbon hero-depth-ribbon--a" data-depth="0.03"></div>
+        <div class="hero-depth-ribbon hero-depth-ribbon--b" data-depth="0.06"></div>
+        <div class="signal-dashboard__panel signal-dashboard__panel--rear"></div>
+        <div class="signal-dashboard__panel signal-dashboard__panel--main">
+          <div class="signal-dashboard__ring"></div>
+          <div class="signal-dashboard__line">
+            <span></span><span></span><span></span><span></span><span></span>
         </div>
         <div class="signal-dashboard__bars">
           <span></span><span></span><span></span><span></span>
@@ -58,8 +65,26 @@
   </div>
 </section>
 
+<section class="dashboard-ribbon" data-reveal>
+  <article class="dashboard-ribbon__card" data-scroll-card>
+    <span>Signal intake</span>
+    <strong>Fine-tuned input rail</strong>
+    <p>Controls stay lightweight and readable while the surrounding shell adds depth and focus.</p>
+  </article>
+  <article class="dashboard-ribbon__card" data-scroll-card>
+    <span>Result core</span>
+    <strong>Animated score centerpiece</strong>
+    <p>Score, reliability, target gap, planner outputs, and charts transition as one synchronized response state.</p>
+  </article>
+  <article class="dashboard-ribbon__card" data-scroll-card>
+    <span>Decision layer</span>
+    <strong>Actionable next moves</strong>
+    <p>Suggestions and validation messages remain intact but are framed like mission advisories instead of raw text.</p>
+  </article>
+</section>
+
 <section class="dashboard-matrix">
-  <div class="glass-card rounded-[2rem] p-6" data-reveal data-tilt>
+  <div class="glass-card glass-card--control rounded-[2rem] p-6" data-reveal data-tilt>
     <div class="text-xs uppercase tracking-[0.28em] text-slate-400">Input Parameters</div>
     <div class="mt-6 space-y-6">
       <div>
@@ -152,7 +177,7 @@
   </div>
 
   <div class="dashboard-stack">
-    <div id="score-core" class="glass-card rounded-[2rem] p-7" data-reveal data-tilt>
+    <div id="score-core" class="glass-card glass-card--score rounded-[2rem] p-7" data-reveal data-tilt>
       <div class="grid gap-6 lg:grid-cols-[240px_1fr] lg:items-center">
         <div class="flex justify-center">
           <div class="relative h-56 w-56">
@@ -195,6 +220,21 @@
         </div>
       </div>
     </div>
+
+    <section class="story-showcase story-showcase--dashboard" data-reveal>
+      <div class="story-showcase__grid">
+        <article class="depth-card depth-card--wide" data-scroll-card data-tilt>
+          <span class="depth-card__eyebrow">Realtime loop</span>
+          <strong class="depth-card__title">Every slider movement becomes a guided system response</strong>
+          <p class="depth-card__copy">Latency, goal gap, validation state, and opportunity ranking respond without any backend contract changes.</p>
+        </article>
+        <article class="depth-card" data-scroll-card data-tilt>
+          <span class="depth-card__eyebrow">Operator clarity</span>
+          <strong class="depth-card__title">Dense data, cleaner hierarchy</strong>
+          <p class="depth-card__copy">The shell now emphasizes what changed, why it matters, and what to do next.</p>
+        </article>
+      </div>
+    </section>
 
     <div class="grid gap-6 lg:grid-cols-2">
       <div class="glass-card rounded-[2rem] p-6" data-reveal data-scroll-card data-tilt>
