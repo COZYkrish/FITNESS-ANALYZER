@@ -1,0 +1,357 @@
+{
+  "regression": {
+    "rf_r2": 0.9156,
+    "rf_rmse": 1.9679,
+    "lr_r2": 1.0,
+    "lr_rmse": 0.0027
+  },
+  "classification": {
+    "accuracy": 0.9833,
+    "cv_mean": 0.9806,
+    "cv_std": 0.0039,
+    "classes": [
+      "Average",
+      "Fit",
+      "Unfit"
+    ]
+  },
+  "clustering": {
+    "silhouette": 0.0542,
+    "cluster_map": {
+      "0": "Sedentary",
+      "2": "Balanced",
+      "1": "Active"
+    }
+  },
+  "feature_importance": {
+    "Calories_Burned": 0.392487,
+    "Experience_Level": 0.23752,
+    "Session_Duration (hours)": 0.147463,
+    "Fat_Percentage": 0.101943,
+    "Workout_Frequency (days/week)": 0.046613,
+    "Water_Intake (liters)": 0.012985,
+    "Resting_BPM": 0.012373,
+    "Weight (kg)": 0.008231,
+    "BMI": 0.007752,
+    "Age": 0.007673,
+    "Height (m)": 0.007356,
+    "Avg_BPM": 0.006835,
+    "Max_BPM": 0.0067,
+    "Workout_enc": 0.002819,
+    "Gender_enc": 0.00125
+  },
+  "dataset_stats": {
+    "total_rows": 1800,
+    "fitness_score_mean": 52.22,
+    "fitness_score_std": 6.9,
+    "level_dist": {
+      "Average": 1681,
+      "Unfit": 67,
+      "Fit": 52
+    },
+    "cluster_dist": {
+      "Sedentary": 733,
+      "Balanced": 595,
+      "Active": 472
+    },
+    "age_mean": 34.5,
+    "bmi_mean": 19.94,
+    "calories_mean": 1033.7,
+    "workout_freq_mean": 3.33
+  },
+  "correlation": {
+    "Age": {
+      "Age": 1.0,
+      "Weight (kg)": 0.005,
+      "Fat_Percentage": -0.03,
+      "Session_Duration (hours)": 0.01,
+      "Calories_Burned": -0.016,
+      "Workout_Frequency (days/week)": 0.031,
+      "Experience_Level": -0.026,
+      "Water_Intake (liters)": -0.043,
+      "BMI": 0.049,
+      "Resting_BPM": 0.005,
+      "fitness_score": -0.006
+    },
+    "Weight (kg)": {
+      "Age": 0.005,
+      "Weight (kg)": 1.0,
+      "Fat_Percentage": 0.003,
+      "Session_Duration (hours)": 0.006,
+      "Calories_Burned": -0.003,
+      "Workout_Frequency (days/week)": -0.027,
+      "Experience_Level": -0.049,
+      "Water_Intake (liters)": -0.017,
+      "BMI": 0.006,
+      "Resting_BPM": -0.026,
+      "fitness_score": -0.033
+    },
+    "Fat_Percentage": {
+      "Age": -0.03,
+      "Weight (kg)": 0.003,
+      "Fat_Percentage": 1.0,
+      "Session_Duration (hours)": 0.012,
+      "Calories_Burned": 0.023,
+      "Workout_Frequency (days/week)": -0.031,
+      "Experience_Level": 0.052,
+      "Water_Intake (liters)": 0.014,
+      "BMI": 0.012,
+      "Resting_BPM": -0.091,
+      "fitness_score": -0.289
+    },
+    "Session_Duration (hours)": {
+      "Age": 0.01,
+      "Weight (kg)": 0.006,
+      "Fat_Percentage": 0.012,
+      "Session_Duration (hours)": 1.0,
+      "Calories_Burned": 0.028,
+      "Workout_Frequency (days/week)": 0.013,
+      "Experience_Level": -0.032,
+      "Water_Intake (liters)": -0.03,
+      "BMI": 0.014,
+      "Resting_BPM": -0.003,
+      "fitness_score": 0.398
+    },
+    "Calories_Burned": {
+      "Age": -0.016,
+      "Weight (kg)": -0.003,
+      "Fat_Percentage": 0.023,
+      "Session_Duration (hours)": 0.028,
+      "Calories_Burned": 1.0,
+      "Workout_Frequency (days/week)": -0.008,
+      "Experience_Level": 0.001,
+      "Water_Intake (liters)": 0.037,
+      "BMI": -0.037,
+      "Resting_BPM": -0.109,
+      "fitness_score": 0.61
+    },
+    "Workout_Frequency (days/week)": {
+      "Age": 0.031,
+      "Weight (kg)": -0.027,
+      "Fat_Percentage": -0.031,
+      "Session_Duration (hours)": 0.013,
+      "Calories_Burned": -0.008,
+      "Workout_Frequency (days/week)": 1.0,
+      "Experience_Level": -0.034,
+      "Water_Intake (liters)": -0.003,
+      "BMI": 0.003,
+      "Resting_BPM": 0.027,
+      "fitness_score": 0.279
+    },
+    "Experience_Level": {
+      "Age": -0.026,
+      "Weight (kg)": -0.049,
+      "Fat_Percentage": 0.052,
+      "Session_Duration (hours)": -0.032,
+      "Calories_Burned": 0.001,
+      "Workout_Frequency (days/week)": -0.034,
+      "Experience_Level": 1.0,
+      "Water_Intake (liters)": 0.041,
+      "BMI": -0.062,
+      "Resting_BPM": 0.008,
+      "fitness_score": 0.498
+    },
+    "Water_Intake (liters)": {
+      "Age": -0.043,
+      "Weight (kg)": -0.017,
+      "Fat_Percentage": 0.014,
+      "Session_Duration (hours)": -0.03,
+      "Calories_Burned": 0.037,
+      "Workout_Frequency (days/week)": -0.003,
+      "Experience_Level": 0.041,
+      "Water_Intake (liters)": 1.0,
+      "BMI": 0.012,
+      "Resting_BPM": -0.003,
+      "fitness_score": 0.155
+    },
+    "BMI": {
+      "Age": 0.049,
+      "Weight (kg)": 0.006,
+      "Fat_Percentage": 0.012,
+      "Session_Duration (hours)": 0.014,
+      "Calories_Burned": -0.037,
+      "Workout_Frequency (days/week)": 0.003,
+      "Experience_Level": -0.062,
+      "Water_Intake (liters)": 0.012,
+      "BMI": 1.0,
+      "Resting_BPM": 0.016,
+      "fitness_score": -0.053
+    },
+    "Resting_BPM": {
+      "Age": 0.005,
+      "Weight (kg)": -0.026,
+      "Fat_Percentage": -0.091,
+      "Session_Duration (hours)": -0.003,
+      "Calories_Burned": -0.109,
+      "Workout_Frequency (days/week)": 0.027,
+      "Experience_Level": 0.008,
+      "Water_Intake (liters)": -0.003,
+      "BMI": 0.016,
+      "Resting_BPM": 1.0,
+      "fitness_score": -0.137
+    },
+    "fitness_score": {
+      "Age": -0.006,
+      "Weight (kg)": -0.033,
+      "Fat_Percentage": -0.289,
+      "Session_Duration (hours)": 0.398,
+      "Calories_Burned": 0.61,
+      "Workout_Frequency (days/week)": 0.279,
+      "Experience_Level": 0.498,
+      "Water_Intake (liters)": 0.155,
+      "BMI": -0.053,
+      "Resting_BPM": -0.137,
+      "fitness_score": 1.0
+    }
+  },
+  "corr_features": [
+    "Age",
+    "Weight (kg)",
+    "Fat_Percentage",
+    "Session_Duration (hours)",
+    "Calories_Burned",
+    "Workout_Frequency (days/week)",
+    "Experience_Level",
+    "Water_Intake (liters)",
+    "BMI",
+    "Resting_BPM",
+    "fitness_score"
+  ],
+  "distributions": {
+    "fitness_score": {
+      "counts": [
+        7,
+        51,
+        170,
+        331,
+        413,
+        399,
+        274,
+        113,
+        33,
+        9
+      ],
+      "edges": [
+        30.97,
+        35.37,
+        39.76,
+        44.16,
+        48.56,
+        52.95,
+        57.35,
+        61.75,
+        66.15,
+        70.54,
+        74.94
+      ]
+    },
+    "Age": {
+      "counts": [
+        395,
+        196,
+        196,
+        193,
+        141,
+        124,
+        163,
+        159,
+        124,
+        109
+      ],
+      "edges": [
+        18.0,
+        22.1,
+        26.2,
+        30.3,
+        34.4,
+        38.5,
+        42.6,
+        46.7,
+        50.8,
+        54.9,
+        59.0
+      ]
+    },
+    "BMI": {
+      "counts": [
+        596,
+        434,
+        333,
+        196,
+        120,
+        65,
+        27,
+        17,
+        8,
+        4
+      ],
+      "edges": [
+        12.32,
+        16.07,
+        19.82,
+        23.58,
+        27.33,
+        31.08,
+        34.83,
+        38.58,
+        42.34,
+        46.09,
+        49.84
+      ]
+    },
+    "Calories_Burned": {
+      "counts": [
+        53,
+        113,
+        194,
+        260,
+        312,
+        322,
+        246,
+        144,
+        64,
+        92
+      ],
+      "edges": [
+        303.0,
+        451.0,
+        599.0,
+        747.0,
+        895.0,
+        1043.0,
+        1191.0,
+        1339.0,
+        1487.0,
+        1635.0,
+        1783.0
+      ]
+    },
+    "Fat_Percentage": {
+      "counts": [
+        111,
+        83,
+        122,
+        108,
+        197,
+        382,
+        344,
+        237,
+        145,
+        71
+      ],
+      "edges": [
+        10.0,
+        12.5,
+        15.0,
+        17.5,
+        20.0,
+        22.5,
+        25.0,
+        27.5,
+        30.0,
+        32.5,
+        35.0
+      ]
+    }
+  }
+}

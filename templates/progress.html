@@ -1,0 +1,203 @@
+{% extends "base_site.html" %}
+{% block title %}Progress | Kinetic Ether{% endblock %}
+{% block body_class %}page-progress{% endblock %}
+{% block content %}
+<div class="progress-shell">
+  <section class="page-hero" data-reveal>
+    <div class="hero-grid">
+      <div>
+        <div class="page-eyebrow">Performance archive</div>
+        <h1 class="page-title">Every saved prediction becomes a training chapter.</h1>
+        <p class="page-copy">The same `fitai_progress` localStorage key now powers a more cinematic progress story with milestones, history, and trend context.</p>
+        <div class="hero-actions">
+          <button onclick="clearProgress()" class="cta-secondary">Clear archive</button>
+          <a href="/dashboard" class="cta-primary">Create new snapshot</a>
+        </div>
+      </div>
+      <div class="signal-scene signal-scene--progress" data-signal-scene data-reveal-delay="120">
+        <div class="signal-scene__ambient"></div>
+        <div class="signal-scene__grid"></div>
+        <div class="signal-progress__ring signal-progress__ring--outer"></div>
+        <div class="signal-progress__ring signal-progress__ring--inner"></div>
+        <div class="signal-progress__trail"></div>
+        <div class="signal-progress__markers">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="signal-scene__label signal-scene__label--a"><span>Long-term arc</span><strong>Momentum</strong></div>
+        <div class="signal-scene__label signal-scene__label--c"><span>Milestones</span><strong>Visible history</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="metric-grid">
+    <article class="metric-panel" data-reveal data-scroll-card>
+      <div class="metric-kicker">Best score</div>
+      <div id="best-score" class="metric-value metric-value--cyan">-</div>
+    </article>
+    <article class="metric-panel" data-reveal data-scroll-card>
+      <div class="metric-kicker">Latest score</div>
+      <div id="latest-score" class="metric-value metric-value--rose">-</div>
+    </article>
+    <article class="metric-panel" data-reveal data-scroll-card>
+      <div class="metric-kicker">Improvement</div>
+      <div id="improvement" class="metric-value metric-value--lime">-</div>
+    </article>
+    <article class="metric-panel" data-reveal data-scroll-card>
+      <div class="metric-kicker">Sessions</div>
+      <div id="total-sessions" class="metric-value metric-value--amber">0</div>
+    </article>
+  </section>
+
+  <section class="progress-grid lg:grid-cols-2">
+    <article class="story-panel" data-reveal>
+      <div class="section-tag">Timeline view</div>
+      <h2 class="section-title">Your practical score evolves as a visible arc.</h2>
+      <p class="section-copy">Compare sessions, inspect momentum, and keep each prediction in a readable chronology instead of burying it in raw rows.</p>
+      <div class="mt-8 h-80"><canvas id="progressChart"></canvas></div>
+      <div id="no-data-msg" class="mt-4 hidden rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-300">No progress data yet. <a href="/dashboard" class="text-cyan-200">Run predictions</a> and save them.</div>
+    </article>
+
+    <div class="dashboard-stack">
+      <article class="timeline-card" data-reveal data-scroll-card data-tilt>
+        <div class="timeline-card__meta">Lifestyle mix</div>
+        <div class="mt-5 h-64"><canvas id="lifestyleChart"></canvas></div>
+      </article>
+      <article class="timeline-card" data-reveal data-scroll-card data-tilt>
+        <div class="timeline-card__meta">Level mix</div>
+        <div class="mt-5 h-64"><canvas id="levelChart"></canvas></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="story-panel" data-reveal>
+    <div class="section-head">
+      <div>
+        <div class="section-tag">Session history</div>
+        <h2 class="section-title">Snapshot memory with change-aware comparison.</h2>
+      </div>
+      <p class="section-copy">The table stays intact for clarity, but now sits inside the wider narrative flow.</p>
+    </div>
+    <div class="table-shell mt-8">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Score</th>
+            <th>Level</th>
+            <th>Lifestyle</th>
+            <th>Change</th>
+          </tr>
+        </thead>
+        <tbody id="progress-table-body"></tbody>
+      </table>
+    </div>
+  </section>
+</div>
+{% endblock %}
+{% block page_scripts %}
+<script>
+  let progressChart, lifestyleChart, levelChart;
+
+  function loadProgress() {
+    const raw = localStorage.getItem('fitai_progress');
+    return raw ? JSON.parse(raw) : [];
+  }
+
+  function clearProgress() {
+    if (confirm('Clear all progress data?')) {
+      localStorage.removeItem('fitai_progress');
+      init();
+      showToast('Progress cleared', 'info');
+    }
+  }
+
+  function init() {
+    const data = loadProgress();
+    const noMsg = document.getElementById('no-data-msg');
+
+    if (data.length === 0) {
+      noMsg.classList.remove('hidden');
+      document.getElementById('best-score').textContent = '-';
+      document.getElementById('latest-score').textContent = '-';
+      document.getElementById('improvement').textContent = '-';
+      document.getElementById('total-sessions').textContent = '0';
+      document.getElementById('progress-table-body').innerHTML = '<tr><td colspan="6" class="px-3 py-4 text-slate-400">No data yet. <a href="/dashboard" class="text-cyan-200">Run predictions</a></td></tr>';
+      renderProgressChart([]);
+      renderPieCharts({}, {});
+      return;
+    }
+
+    noMsg.classList.add('hidden');
+    const scores = data.map(d => d.practicalScore ?? d.score);
+    const best = Math.max(...scores).toFixed(1);
+    const latest = scores[scores.length - 1].toFixed(1);
+    const improvement = (scores[scores.length - 1] - scores[0]).toFixed(1);
+    document.getElementById('best-score').textContent = best;
+    document.getElementById('latest-score').textContent = latest;
+    document.getElementById('improvement').textContent = (improvement >= 0 ? '+' : '') + improvement;
+    document.getElementById('total-sessions').textContent = data.length;
+
+    document.getElementById('progress-table-body').innerHTML = data.map((d, i) => {
+      const dt = new Date(d.date);
+      const sessionScore = d.practicalScore ?? d.score;
+      const previousScore = i === 0 ? null : (data[i - 1].practicalScore ?? data[i - 1].score);
+      const change = i === 0 ? '-' : (sessionScore - previousScore).toFixed(1);
+      return `<tr><td>${dt.toLocaleDateString()}</td><td>${dt.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}</td><td class="font-semibold">${sessionScore.toFixed(1)}</td><td>${d.level}</td><td>${d.lifestyle}</td><td>${change !== '-' && parseFloat(change) > 0 ? '+' : ''}${change}</td></tr>`;
+    }).reverse().join('');
+
+    renderProgressChart(data);
+    const lifestyleCounts = {};
+    const levelCounts = {};
+    data.forEach(d => {
+      lifestyleCounts[d.lifestyle] = (lifestyleCounts[d.lifestyle] || 0) + 1;
+      levelCounts[d.level] = (levelCounts[d.level] || 0) + 1;
+    });
+    renderPieCharts(lifestyleCounts, levelCounts);
+  }
+
+  function renderProgressChart(data) {
+    const ctx = document.getElementById('progressChart').getContext('2d');
+    if (progressChart) progressChart.destroy();
+    progressChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: data.map(d => new Date(d.date).toLocaleDateString()),
+        datasets: [{
+          label: 'Practical Score',
+          data: data.map(d => d.practicalScore ?? d.score),
+          borderColor: '#67e8f9',
+          backgroundColor: 'rgba(103,232,249,0.10)',
+          pointBackgroundColor: '#bef264',
+          tension: 0.35,
+          fill: true
+        }]
+      },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { min: 0, max: 100, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } }, x: { grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { color: '#94a3b8' } } } }
+    });
+  }
+
+  function renderPieCharts(lifestyleCounts, levelCounts) {
+    const lsCtx = document.getElementById('lifestyleChart').getContext('2d');
+    const lvCtx = document.getElementById('levelChart').getContext('2d');
+    if (lifestyleChart) lifestyleChart.destroy();
+    if (levelChart) levelChart.destroy();
+
+    const pieOpts = { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { color: '#d1d5db', font: { family: 'Manrope' } } } } };
+
+    lifestyleChart = new Chart(lsCtx, {
+      type: 'doughnut',
+      data: { labels: Object.keys(lifestyleCounts).length ? Object.keys(lifestyleCounts) : ['No Data'], datasets: [{ data: Object.values(lifestyleCounts).length ? Object.values(lifestyleCounts) : [1], backgroundColor: ['#bef264', '#67e8f9', '#f472b6'], borderWidth: 0 }] },
+      options: pieOpts
+    });
+
+    levelChart = new Chart(lvCtx, {
+      type: 'doughnut',
+      data: { labels: Object.keys(levelCounts).length ? Object.keys(levelCounts) : ['No Data'], datasets: [{ data: Object.values(levelCounts).length ? Object.values(levelCounts) : [1], backgroundColor: ['#67e8f9', '#bef264', '#fb923c'], borderWidth: 0 }] },
+      options: pieOpts
+    });
+  }
+
+  window.addEventListener('load', init);
+</script>
+{% endblock %}

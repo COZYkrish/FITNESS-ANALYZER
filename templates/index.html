@@ -1,0 +1,215 @@
+{% extends "base_site.html" %}
+{% block title %}Kinetic Ether | Fitness Habit Analyzer{% endblock %}
+{% block body_class %}page-home{% endblock %}
+{% block content %}
+<section class="page-hero" data-reveal>
+  <div class="hero-grid">
+    <div>
+      <div class="page-eyebrow">AI fitness intelligence</div>
+      <h1 class="hero-title">
+        From raw workout signals to a scroll-driven story about how you train.
+      </h1>
+      <p class="hero-copy">
+        Kinetic Ether turns biometrics, recovery patterns, and session habits into a cinematic decision layer. Preserve the current machine learning workflow, but present it like a premium fitness command system.
+      </p>
+      <div class="hero-actions">
+        <a href="/dashboard" class="cta-primary">Open prediction lab</a>
+        <a href="/analytics" class="cta-secondary">Explore model depth</a>
+      </div>
+      <div class="pill-row mt-8">
+        <div class="metric-pill">Real-time scoring</div>
+        <div class="metric-pill">Lifestyle clustering</div>
+        <div class="metric-pill">Progress memory</div>
+      </div>
+    </div>
+    <div class="signal-scene signal-scene--home" data-signal-scene data-reveal-delay="120">
+      <div class="signal-scene__ambient"></div>
+      <div class="signal-scene__grid"></div>
+      <div class="signal-home__orbit signal-home__orbit--outer"></div>
+      <div class="signal-home__orbit signal-home__orbit--mid"></div>
+      <div class="signal-home__orbit signal-home__orbit--inner"></div>
+      <div class="signal-home__core">
+        <div class="signal-home__glow"></div>
+        <div class="signal-home__pulse"></div>
+      </div>
+      <div class="signal-home__nodes">
+        <span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
+      <div class="signal-scene__label signal-scene__label--a">
+        <span>Training records</span>
+        <strong id="stat-rows">1,800</strong>
+      </div>
+      <div class="signal-scene__label signal-scene__label--b">
+        <span>Classifier accuracy</span>
+        <strong id="stat-acc">98.3%</strong>
+      </div>
+      <div class="signal-scene__label signal-scene__label--c">
+        <span>Signal clusters</span>
+        <strong>3 states</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stats-row">
+  <article class="metric-panel" data-reveal data-scroll-card>
+    <div class="metric-kicker">Prediction stack</div>
+    <div class="metric-value metric-value--cyan">03</div>
+    <p class="section-copy">Regression, classification, and clustering collaborate on the same athlete profile.</p>
+  </article>
+  <article class="metric-panel" data-reveal data-scroll-card>
+    <div class="metric-kicker">Feature signals</div>
+    <div class="metric-value metric-value--lime">15</div>
+    <p class="section-copy">Vitals, heart rate, hydration, frequency, and duration shape every recommendation.</p>
+  </article>
+  <article class="metric-panel" data-reveal data-scroll-card>
+    <div class="metric-kicker">Action planner</div>
+    <div class="metric-value metric-value--amber">Fast</div>
+    <p class="section-copy">Gap-to-target logic surfaces the quickest path from current score to next milestone.</p>
+  </article>
+  <article class="metric-panel" data-reveal data-scroll-card>
+    <div class="metric-kicker">Progress loop</div>
+    <div class="metric-value metric-value--rose">Live</div>
+    <p class="section-copy">Saved snapshots keep the story going with timeline views and weekly comparison signals.</p>
+  </article>
+</section>
+
+<section class="story-panel" data-reveal>
+  <div class="section-head">
+    <div>
+      <div class="section-tag">Scroll narrative</div>
+      <h2 class="section-title">A product story that moves from input to change.</h2>
+    </div>
+  </div>
+  <div class="story-panel__rail"></div>
+  <div class="story-step" data-scroll-card>
+    <div class="story-step__card">
+      <div class="story-step__index">01 intake</div>
+      <h3 class="story-step__title">Collect the athlete profile</h3>
+      <p class="story-step__copy">Age, heart rate, body composition, hydration, and training volume form the current state of the user.</p>
+    </div>
+    <div class="story-step__dot"></div>
+    <div></div>
+  </div>
+  <div class="story-step" data-scroll-card>
+    <div></div>
+    <div class="story-step__dot"></div>
+    <div class="story-step__card">
+      <div class="story-step__index">02 engine</div>
+      <h3 class="story-step__title">Run the prediction stack</h3>
+      <p class="story-step__copy">The same Flask endpoint returns score, level, cluster, reliability, planner actions, and metric feedback.</p>
+    </div>
+  </div>
+  <div class="story-step" data-scroll-card>
+    <div class="story-step__card">
+      <div class="story-step__index">03 guidance</div>
+      <h3 class="story-step__title">Translate model output into movement</h3>
+      <p class="story-step__copy">The dashboard visualizes tradeoffs, shows the target gap, and prioritizes the fastest scoring gains.</p>
+    </div>
+    <div class="story-step__dot"></div>
+    <div></div>
+  </div>
+  <div class="story-step" data-scroll-card>
+    <div></div>
+    <div class="story-step__dot"></div>
+    <div class="story-step__card">
+      <div class="story-step__index">04 memory</div>
+      <h3 class="story-step__title">Track the recovery and progress arc</h3>
+      <p class="story-step__copy">Local storage snapshots feed the progress page so the interface tells a continuous training story over time.</p>
+    </div>
+  </div>
+</section>
+
+<section class="story-grid" style="grid-template-columns: 1.05fr 0.95fr;">
+  <article class="story-stage" data-story-pin data-reveal>
+    <div class="section-tag">3D scroll depth</div>
+    <h2 class="section-title">A layered scene built for depth, not decoration.</h2>
+    <p class="section-copy">Use selective 3D motion in the hero and storytelling sections so the interface feels dimensional without becoming heavy.</p>
+    <div class="story-stage__layers mt-8">
+      <div class="story-stage__plane story-stage__plane--base" data-depth="0.02"></div>
+      <div class="story-stage__plane story-stage__plane--mid" data-depth="0.05"></div>
+      <div class="story-stage__plane story-stage__plane--top" data-depth="0.08"></div>
+      <div class="story-model" aria-hidden="true">
+        <div class="story-model__shadow"></div>
+        <div class="story-model__core">
+          <div class="story-model__sphere"></div>
+          <div class="story-model__ring story-model__ring--outer"></div>
+          <div class="story-model__ring story-model__ring--middle"></div>
+          <div class="story-model__ring story-model__ring--inner"></div>
+        </div>
+      </div>
+      <div class="stage-badge stage-badge--a">
+        model reliability
+        <strong>context-aware</strong>
+      </div>
+      <div class="stage-badge stage-badge--b">
+        planner actions
+        <strong>goal focused</strong>
+      </div>
+      <div class="stage-badge stage-badge--c">
+        saved progress
+        <strong>weekly memory</strong>
+      </div>
+    </div>
+  </article>
+  <div class="dashboard-stack">
+    <article class="spotlight-card" data-reveal data-scroll-card data-tilt>
+      <div class="section-tag">Dashboard</div>
+      <h3 class="timeline-card__title">Prediction lab</h3>
+      <p class="timeline-card__copy">Reactive controls, animated score changes, planner cards, AI suggestions, and opportunity charts all update from the same existing backend response.</p>
+      <a href="/dashboard" class="cta-secondary mt-6">Launch dashboard</a>
+    </article>
+    <article class="spotlight-card" data-reveal data-scroll-card data-tilt>
+      <div class="section-tag">Progress</div>
+      <h3 class="timeline-card__title">Recovery timeline</h3>
+      <p class="timeline-card__copy">Local snapshots become a visual archive with milestones, trend charts, and change callouts instead of a bare table.</p>
+      <a href="/progress" class="cta-secondary mt-6">View progress</a>
+    </article>
+    <article class="spotlight-card" data-reveal data-scroll-card data-tilt>
+      <div class="section-tag">Analytics</div>
+      <h3 class="timeline-card__title">Model credibility</h3>
+      <p class="timeline-card__copy">Explain the model with feature importance, score distributions, heatmaps, and comparative bars in a cleaner cinematic shell.</p>
+      <a href="/analytics" class="cta-secondary mt-6">See analytics</a>
+    </article>
+  </div>
+</section>
+
+<section class="page-hero" data-reveal>
+  <div class="section-head">
+    <div>
+      <div class="section-tag">Transformation loop</div>
+      <h2 class="section-title">A frontend that tells users what changes next, not just what happened.</h2>
+    </div>
+    <a href="/about" class="cta-secondary">See platform story</a>
+  </div>
+  <div class="card-grid mt-8">
+    <article class="timeline-card" data-scroll-card data-tilt>
+      <div class="timeline-card__meta">Signal clarity</div>
+      <div class="timeline-card__title">Validation stays visible</div>
+      <p class="timeline-card__copy">Warnings and metric feedback become part of the narrative so the user understands confidence, not just outcome.</p>
+    </article>
+    <article class="timeline-card" data-scroll-card data-tilt>
+      <div class="timeline-card__meta">Momentum design</div>
+      <div class="timeline-card__title">Every score is a chapter</div>
+      <p class="timeline-card__copy">Target gap, ETA, and next-best action create momentum cues that drive the user back into the system.</p>
+    </article>
+    <article class="timeline-card" data-scroll-card data-tilt>
+      <div class="timeline-card__meta">Immersive motion</div>
+      <div class="timeline-card__title">2D and 3D work together</div>
+      <p class="timeline-card__copy">Reveal timing, parallax depth, tilt, orbit visuals, and chart transitions lift the app without touching backend meaning.</p>
+    </article>
+  </div>
+</section>
+{% endblock %}
+{% block page_scripts %}
+<script>
+  fetch('/api/metadata')
+    .then(r => r.json())
+    .then(data => {
+      const s = data.dataset_stats;
+      document.getElementById('stat-rows').textContent = s.total_rows.toLocaleString();
+      document.getElementById('stat-acc').textContent = (data.classification.accuracy * 100).toFixed(1) + '%';
+    })
+    .catch(() => {});
+</script>
+{% endblock %}

@@ -1,0 +1,119 @@
+{% extends "base_site.html" %}
+{% block title %}About | Kinetic Ether{% endblock %}
+{% block body_class %}page-about{% endblock %}
+{% block content %}
+<div class="about-shell">
+  <section class="page-hero" data-reveal>
+    <div class="hero-grid">
+      <div>
+        <div class="page-eyebrow">Product architecture</div>
+        <h1 class="page-title">Three model views, one fitness intelligence story.</h1>
+        <p class="page-copy">This frontend now explains the platform like a product narrative while the Flask routes, model assets, prediction service, analytics payload, and browser-side tools remain unchanged.</p>
+        <div class="pill-row mt-8">
+          <div class="metric-pill">Flask routes preserved</div>
+          <div class="metric-pill">Model outputs unchanged</div>
+          <div class="metric-pill">Frontend system upgraded</div>
+        </div>
+      </div>
+      <div class="signal-scene signal-scene--about" data-signal-scene data-reveal-delay="120">
+        <div class="signal-scene__ambient"></div>
+        <div class="signal-scene__grid"></div>
+        <div class="signal-about__rail signal-about__rail--h"></div>
+        <div class="signal-about__rail signal-about__rail--v"></div>
+        <div class="signal-about__block signal-about__block--backend"></div>
+        <div class="signal-about__block signal-about__block--models"></div>
+        <div class="signal-about__block signal-about__block--client"></div>
+        <div class="signal-about__block signal-about__block--core"></div>
+        <div class="signal-scene__label signal-scene__label--a"><span>Backend</span><strong>Flask layer</strong></div>
+        <div class="signal-scene__label signal-scene__label--b"><span>Models</span><strong>Inference core</strong></div>
+        <div class="signal-scene__label signal-scene__label--c"><span>Frontend</span><strong>Client shell</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card-grid">
+    <article class="timeline-card" data-reveal data-scroll-card data-tilt>
+      <div class="timeline-card__meta">Regression</div>
+      <div class="timeline-card__title">RandomForestRegressor</div>
+      <p class="timeline-card__copy">Predicts the continuous fitness score. It remains the core estimate later normalized into the practical score shown in the dashboard experience.</p>
+      <div class="mt-5 rounded-2xl border border-cyan-400/20 bg-cyan-400/10 px-4 py-3 font-mono text-sm text-cyan-100">sklearn.ensemble.RandomForestRegressor(...)</div>
+    </article>
+    <article class="timeline-card" data-reveal data-scroll-card data-tilt>
+      <div class="timeline-card__meta">Classification</div>
+      <div class="timeline-card__title">LogisticRegression</div>
+      <p class="timeline-card__copy">Maps the same scaled feature vector into a human-readable band such as Fit, Average, or Unfit without changing endpoint structure.</p>
+      <div class="mt-5 rounded-2xl border border-fuchsia-400/20 bg-fuchsia-400/10 px-4 py-3 font-mono text-sm text-fuchsia-100">sklearn.linear_model.LogisticRegression(...)</div>
+    </article>
+    <article class="timeline-card" data-reveal data-scroll-card data-tilt>
+      <div class="timeline-card__meta">Clustering</div>
+      <div class="timeline-card__title">KMeans</div>
+      <p class="timeline-card__copy">Groups the user into a lifestyle bucket so the interface can tell a more useful behavior story beyond one isolated score.</p>
+      <div class="mt-5 rounded-2xl border border-lime-400/20 bg-lime-400/10 px-4 py-3 font-mono text-sm text-lime-100">sklearn.cluster.KMeans(...)</div>
+    </article>
+  </section>
+
+  <section class="story-grid lg:grid-cols-2">
+    <article class="story-panel" data-reveal>
+      <div class="section-tag">Pipeline</div>
+      <h2 class="section-title">How data moves through the system.</h2>
+      <div class="story-timeline mt-8">
+        <div class="timeline-card" data-scroll-card>
+          <div class="timeline-card__meta">01 dataset</div>
+          <p class="timeline-card__copy">1,800 synthetic gym-member records are cleaned, scaled, and encoded during training.</p>
+        </div>
+        <div class="timeline-card" data-scroll-card>
+          <div class="timeline-card__meta">02 model load</div>
+          <p class="timeline-card__copy">Scikit-learn artifacts are serialized with `joblib` and loaded once when the Flask app starts.</p>
+        </div>
+        <div class="timeline-card" data-scroll-card>
+          <div class="timeline-card__meta">03 inference</div>
+          <p class="timeline-card__copy">The dashboard sends JSON to `/predict` and receives score, level, lifestyle, validation, planner, and suggestion data.</p>
+        </div>
+        <div class="timeline-card" data-scroll-card>
+          <div class="timeline-card__meta">04 analytics</div>
+          <p class="timeline-card__copy">The analytics page reads precomputed metadata from `/api/analytics` instead of recalculating heavy logic in the browser.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="story-stage" data-story-pin data-reveal>
+      <div class="section-tag">System depth</div>
+      <h2 class="section-title">A product-shell view of the stack.</h2>
+      <div class="story-stage__layers mt-8">
+        <div class="story-stage__plane story-stage__plane--base"></div>
+        <div class="story-stage__plane story-stage__plane--mid"></div>
+        <div class="story-stage__plane story-stage__plane--top"></div>
+        <div class="story-model" aria-hidden="true">
+          <div class="story-model__shadow"></div>
+          <div class="story-model__core">
+            <div class="story-model__sphere"></div>
+            <div class="story-model__ring story-model__ring--outer"></div>
+            <div class="story-model__ring story-model__ring--middle"></div>
+            <div class="story-model__ring story-model__ring--inner"></div>
+          </div>
+        </div>
+        <div class="stage-badge stage-badge--a">backend<strong>Flask</strong></div>
+        <div class="stage-badge stage-badge--b">models<strong>scikit-learn</strong></div>
+        <div class="stage-badge stage-badge--c">frontend<strong>story system</strong></div>
+      </div>
+    </article>
+  </section>
+
+  <section class="story-panel" data-reveal>
+    <div class="section-head">
+      <div>
+        <div class="section-tag">Stack</div>
+        <h2 class="section-title">Technologies behind the experience.</h2>
+      </div>
+    </div>
+    <div class="card-grid mt-8">
+      <div class="timeline-card" data-scroll-card>Python + Flask</div>
+      <div class="timeline-card" data-scroll-card>scikit-learn</div>
+      <div class="timeline-card" data-scroll-card>pandas + NumPy</div>
+      <div class="timeline-card" data-scroll-card>Chart.js</div>
+      <div class="timeline-card" data-scroll-card>localStorage</div>
+      <div class="timeline-card" data-scroll-card>Tailwind CDN + custom CSS/JS</div>
+    </div>
+  </section>
+</div>
+{% endblock %}

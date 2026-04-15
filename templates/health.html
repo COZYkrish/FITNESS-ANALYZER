@@ -1,0 +1,374 @@
+{% extends "base_site.html" %}
+{% block title %}Health | Kinetic Ether{% endblock %}
+{% block body_class %}page-health{% endblock %}
+{% block content %}
+<div class="health-shell">
+  <section class="page-hero" data-reveal>
+    <div class="hero-grid">
+      <div>
+        <div class="page-eyebrow">Recovery and daily habits</div>
+        <h1 class="page-title">Turn daily health checks into a visible readiness story.</h1>
+        <p class="page-copy">Water tracking, BMI checks, checklist completion, and reminders keep the same browser-side logic and storage keys while gaining stronger visual feedback.</p>
+      </div>
+      <div class="signal-scene signal-scene--health" data-signal-scene data-reveal-delay="120">
+        <div class="signal-scene__ambient"></div>
+        <div class="signal-scene__grid"></div>
+        <div class="signal-health__scan signal-health__scan--top"></div>
+        <div class="signal-health__scan signal-health__scan--bottom"></div>
+        <div class="signal-health__spine"></div>
+        <div class="signal-health__helix">
+          <span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="signal-health__bridges">
+          <i></i><i></i><i></i><i></i>
+        </div>
+        <div class="signal-scene__label signal-scene__label--a"><span>Hydration</span><strong>Daily rhythm</strong></div>
+        <div class="signal-scene__label signal-scene__label--b"><span>Recovery</span><strong>Body-aware</strong></div>
+        <div class="signal-scene__label signal-scene__label--c"><span>Readiness</span><strong>Calm signal</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid gap-6 xl:grid-cols-12">
+    <article class="glass-card rounded-[2rem] p-7 xl:col-span-5" data-reveal data-tilt>
+      <div class="flex items-center justify-between">
+        <h2 class="font-headline text-2xl font-bold">Daily Water Tracker</h2>
+        <span id="water-date" class="text-sm text-slate-400"></span>
+      </div>
+      <div class="mt-6 grid items-start gap-6 lg:grid-cols-[180px_minmax(0,1fr)]">
+        <div class="mx-auto flex h-72 w-28 items-end rounded-[2rem] border border-cyan-400/20 bg-white/5 p-3">
+          <div id="bottle-fill" class="w-full rounded-[1.2rem] bg-gradient-to-t from-cyan-400 to-cyan-200 transition-all"></div>
+        </div>
+        <div class="grid gap-4 sm:grid-cols-2 2xl:grid-cols-3">
+          <div class="min-w-0 rounded-3xl border border-white/10 bg-white/5 p-4">
+            <div class="text-[0.7rem] uppercase tracking-[0.16em] text-slate-400">Consumed</div>
+            <div id="water-consumed" class="mt-2 break-words font-headline text-3xl font-bold leading-none text-cyan-200">0.0L</div>
+          </div>
+          <div class="min-w-0 rounded-3xl border border-white/10 bg-white/5 p-4">
+            <div class="text-[0.7rem] uppercase tracking-[0.16em] text-slate-400">Remaining</div>
+            <div id="water-remaining" class="mt-2 break-words font-headline text-3xl font-bold leading-none text-lime-200">3.0L</div>
+          </div>
+          <div class="min-w-0 rounded-3xl border border-white/10 bg-white/5 p-4 sm:col-span-2 2xl:col-span-1">
+            <div class="text-[0.7rem] uppercase tracking-[0.16em] text-slate-400">Progress</div>
+            <div id="water-pct" class="mt-2 break-words font-headline text-3xl font-bold leading-none text-white">0%</div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-6 flex flex-wrap items-center gap-3">
+        <label class="text-sm text-slate-300">Goal</label>
+        <input id="water-goal" type="number" value="3.0" min="1" max="6" step="0.5" class="w-24 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-slate-100" onchange="updateWaterGoal()">
+        <span class="text-sm text-slate-400">L</span>
+      </div>
+      <div class="mt-4 h-2 rounded-full bg-white/10"><div id="water-bar-fill" class="h-2 rounded-full bg-cyan-300"></div></div>
+      <div id="water-bar-label" class="mt-2 text-sm text-slate-400">0% of daily goal</div>
+      <div class="mt-5 flex flex-wrap gap-3">
+        <button onclick="addWater(0.25)" class="rounded-2xl border border-white/10 px-4 py-3 text-sm">+250ml</button>
+        <button onclick="addWater(0.5)" class="rounded-2xl border border-white/10 px-4 py-3 text-sm">+500ml</button>
+        <button onclick="addWater(0.75)" class="rounded-2xl border border-white/10 px-4 py-3 text-sm">+750ml</button>
+        <button onclick="addWater(1.0)" class="rounded-2xl border border-white/10 px-4 py-3 text-sm">+1L</button>
+        <button onclick="resetWater()" class="rounded-2xl border border-fuchsia-400/30 px-4 py-3 text-sm text-fuchsia-200">Reset</button>
+      </div>
+      <div id="water-log" class="mt-5 space-y-2"></div>
+    </article>
+
+    <article class="glass-card rounded-[2rem] p-7 xl:col-span-4" data-reveal data-tilt>
+      <h2 class="font-headline text-2xl font-bold">BMI Calculator</h2>
+      <div class="mt-6 grid gap-4 sm:grid-cols-3">
+        <input id="bmi-weight" type="number" value="70" min="30" max="200" step="0.5" class="rounded-2xl border border-white/10 bg-white/5 text-slate-100" oninput="calcBMI()">
+        <input id="bmi-height" type="number" value="175" min="100" max="220" class="rounded-2xl border border-white/10 bg-white/5 text-slate-100" oninput="calcBMI()">
+        <input id="bmi-age" type="number" value="30" min="10" max="100" class="rounded-2xl border border-white/10 bg-white/5 text-slate-100" oninput="calcBMI()">
+      </div>
+      <div class="mt-6 rounded-3xl border border-white/10 bg-white/5 p-6 text-center">
+        <div id="bmi-number" class="font-headline text-5xl font-bold text-cyan-200">22.9</div>
+        <div id="bmi-category" class="mt-2 text-lg text-slate-300">Normal Weight</div>
+        <div class="mt-6 h-3 rounded-full bg-white/10">
+          <div id="bmi-marker" class="relative -top-1 h-5 w-5 rounded-full border-2 border-white bg-cyan-300"></div>
+        </div>
+      </div>
+      <div class="mt-5 space-y-3 text-sm text-slate-300">
+        <div class="flex justify-between rounded-2xl border border-white/10 bg-white/5 px-4 py-3"><span>Ideal range</span><span id="ideal-range">-</span></div>
+        <div class="flex justify-between rounded-2xl border border-white/10 bg-white/5 px-4 py-3"><span>Health risk</span><span id="health-risk">-</span></div>
+        <div class="flex justify-between rounded-2xl border border-white/10 bg-white/5 px-4 py-3"><span>Recommended calories</span><span id="rec-calories">-</span></div>
+      </div>
+    </article>
+
+    <div class="dashboard-stack xl:col-span-3">
+      <article class="glass-card rounded-[2rem] p-6" data-reveal data-scroll-card data-tilt>
+        <div class="flex items-center justify-between">
+          <h2 class="font-headline text-2xl font-bold">Checklist</h2>
+          <span id="check-count" class="text-sm text-slate-400">0/7</span>
+        </div>
+        <div class="mt-5 space-y-3">
+          <div class="check-item flex cursor-pointer items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3" id="ci-water" onclick="toggleCheck('ci-water')"><div class="h-5 w-5 rounded-full border border-white/20"></div><span>Drink 8+ glasses of water</span></div>
+          <div class="check-item flex cursor-pointer items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3" id="ci-workout" onclick="toggleCheck('ci-workout')"><div class="h-5 w-5 rounded-full border border-white/20"></div><span>Complete workout session</span></div>
+          <div class="check-item flex cursor-pointer items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3" id="ci-sleep" onclick="toggleCheck('ci-sleep')"><div class="h-5 w-5 rounded-full border border-white/20"></div><span>Get 7-9 hours of sleep</span></div>
+          <div class="check-item flex cursor-pointer items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3" id="ci-protein" onclick="toggleCheck('ci-protein')"><div class="h-5 w-5 rounded-full border border-white/20"></div><span>Hit protein goal</span></div>
+          <div class="check-item flex cursor-pointer items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3" id="ci-steps" onclick="toggleCheck('ci-steps')"><div class="h-5 w-5 rounded-full border border-white/20"></div><span>Walk 10,000+ steps</span></div>
+          <div class="check-item flex cursor-pointer items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3" id="ci-stretch" onclick="toggleCheck('ci-stretch')"><div class="h-5 w-5 rounded-full border border-white/20"></div><span>Mobility or stretch</span></div>
+          <div class="check-item flex cursor-pointer items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3" id="ci-nojunk" onclick="toggleCheck('ci-nojunk')"><div class="h-5 w-5 rounded-full border border-white/20"></div><span>No junk food today</span></div>
+        </div>
+        <div class="mt-5 h-2 rounded-full bg-white/10"><div id="checklist-fill" class="h-2 rounded-full bg-lime-300"></div></div>
+        <div id="checklist-pct" class="mt-2 text-sm text-slate-400">0%</div>
+      </article>
+
+      <article class="glass-card rounded-[2rem] p-6" data-reveal data-scroll-card data-tilt>
+        <h2 class="font-headline text-2xl font-bold">Smart Reminders</h2>
+        <div class="mt-4">
+          <input id="reminder-time" type="time" class="rounded-2xl border border-white/10 bg-white/5 text-slate-100" onchange="saveReminderTime()">
+        </div>
+        <div id="reminder-status" class="mt-4 text-sm leading-7 text-slate-300">Set a reminder time.</div>
+        <div id="reminder-countdown" class="mt-2 text-sm text-slate-400">Next reminder: --</div>
+        <div id="notif-list" class="mt-5 space-y-3"></div>
+        <div class="mt-5 flex flex-wrap gap-3">
+          <button onclick="requestNotifPermission()" class="rounded-2xl border border-cyan-400/30 px-4 py-3 text-sm text-cyan-200">Enable Notifications</button>
+          <button onclick="testReminderNow()" class="rounded-2xl border border-fuchsia-400/30 px-4 py-3 text-sm text-fuchsia-200">Test Reminder</button>
+        </div>
+      </article>
+    </div>
+  </section>
+</div>
+{% endblock %}
+{% block page_scripts %}
+<script>
+  const todayKey = () => 'water_' + new Date().toDateString();
+  let waterData = { consumed: 0, goal: 3.0, log: [] };
+  const REMINDER_TIME_KEY = 'fitai_reminder_time';
+  const REMINDER_SENT_KEY = 'fitai_reminder_sent_on';
+  const REMINDER_LAST_FIRE_KEY = 'fitai_reminder_last_fire';
+  let reminderTicker = null;
+
+  function loadWater() {
+    const saved = localStorage.getItem(todayKey());
+    if (saved) waterData = JSON.parse(saved);
+    document.getElementById('water-goal').value = waterData.goal;
+    renderWater();
+  }
+
+  function saveWater() {
+    localStorage.setItem(todayKey(), JSON.stringify(waterData));
+  }
+
+  function addWater(amount) {
+    waterData.consumed = Math.min(waterData.consumed + amount, 10);
+    waterData.log.push({ time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), amount });
+    saveWater();
+    renderWater();
+    if (waterData.consumed >= waterData.goal) showToast('Daily water goal reached.', 'success');
+    generateReminders();
+  }
+
+  function resetWater() {
+    waterData = { consumed: 0, goal: parseFloat(document.getElementById('water-goal').value), log: [] };
+    saveWater();
+    renderWater();
+    showToast('Water tracker reset.', 'info');
+  }
+
+  function updateWaterGoal() {
+    waterData.goal = parseFloat(document.getElementById('water-goal').value) || 3.0;
+    saveWater();
+    renderWater();
+  }
+
+  function renderWater() {
+    const pct = Math.min((waterData.consumed / waterData.goal) * 100, 100);
+    document.getElementById('water-consumed').textContent = waterData.consumed.toFixed(1) + 'L';
+    document.getElementById('water-remaining').textContent = Math.max(waterData.goal - waterData.consumed, 0).toFixed(1) + 'L';
+    document.getElementById('water-pct').textContent = pct.toFixed(0) + '%';
+    document.getElementById('water-bar-fill').style.width = pct + '%';
+    document.getElementById('water-bar-label').textContent = pct.toFixed(0) + '% of daily goal (' + waterData.goal + 'L)';
+    document.getElementById('bottle-fill').style.height = pct + '%';
+    document.getElementById('water-date').textContent = new Date().toLocaleDateString();
+    document.getElementById('water-log').innerHTML = waterData.log.slice(-6).reverse().map(l => `<div class="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-300 flex justify-between"><span>${l.time}</span><span>+${(l.amount * 1000).toFixed(0)}ml</span></div>`).join('') || '<div class="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-400">No entries today.</div>';
+  }
+
+  function calcBMI() {
+    const w = parseFloat(document.getElementById('bmi-weight').value);
+    const hCm = parseFloat(document.getElementById('bmi-height').value);
+    const age = parseFloat(document.getElementById('bmi-age').value);
+    const h = hCm / 100;
+    const bmi = w / (h * h);
+    document.getElementById('bmi-number').textContent = bmi.toFixed(1);
+    let cat = 'Normal Weight', risk = 'Minimal', color = '#bef264';
+    if (bmi < 18.5) { cat = 'Underweight'; risk = 'Low (other risks)'; color = '#60a5fa'; }
+    else if (bmi >= 25 && bmi < 30) { cat = 'Overweight'; risk = 'Moderate'; color = '#f59e0b'; }
+    else if (bmi >= 30) { cat = 'Obese'; risk = 'High'; color = '#fb7185'; }
+    document.getElementById('bmi-category').textContent = cat;
+    document.getElementById('bmi-category').style.color = color;
+    document.getElementById('bmi-marker').style.left = Math.min(Math.max((bmi - 15) / 25 * 100, 0), 100) + '%';
+    document.getElementById('ideal-range').textContent = `${(18.5 * h * h).toFixed(1)} - ${(24.9 * h * h).toFixed(1)} kg`;
+    document.getElementById('health-risk').textContent = risk;
+    const bmr = 10 * w + 6.25 * hCm - 5 * age + 5;
+    document.getElementById('rec-calories').textContent = `${Math.round(bmr * 1.4)} - ${Math.round(bmr * 1.7)} kcal/day`;
+  }
+
+  function toggleCheck(id) {
+    const item = document.getElementById(id);
+    item.classList.toggle('checked');
+    item.classList.toggle('border-lime-300');
+    item.classList.toggle('bg-lime-300/10');
+    updateChecklistProgress();
+    saveChecklist();
+  }
+
+  function updateChecklistProgress() {
+    const all = document.querySelectorAll('.check-item').length;
+    const done = document.querySelectorAll('.check-item.checked').length;
+    const pct = Math.round((done / all) * 100);
+    document.getElementById('checklist-fill').style.width = pct + '%';
+    document.getElementById('checklist-pct').textContent = pct + '%';
+    document.getElementById('check-count').textContent = done + '/' + all;
+  }
+
+  function saveChecklist() {
+    const checked = [];
+    document.querySelectorAll('.check-item.checked').forEach(el => checked.push(el.id));
+    localStorage.setItem('checklist_' + new Date().toDateString(), JSON.stringify(checked));
+  }
+
+  function loadChecklist() {
+    const saved = localStorage.getItem('checklist_' + new Date().toDateString());
+    if (saved) {
+      JSON.parse(saved).forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.classList.add('checked', 'border-lime-300', 'bg-lime-300/10');
+        }
+      });
+    }
+    updateChecklistProgress();
+  }
+
+  function loadReminderTime() {
+    const savedTime = localStorage.getItem(REMINDER_TIME_KEY) || '19:00';
+    document.getElementById('reminder-time').value = savedTime;
+    updateReminderStatus(`Daily reminder set for ${formatReminderTime(savedTime)}.`);
+    renderReminderCountdown();
+  }
+
+  function saveReminderTime() {
+    const time = document.getElementById('reminder-time').value || '19:00';
+    localStorage.setItem(REMINDER_TIME_KEY, time);
+    localStorage.removeItem(REMINDER_SENT_KEY);
+    localStorage.removeItem(REMINDER_LAST_FIRE_KEY);
+    updateReminderStatus(`Daily reminder set for ${formatReminderTime(time)}.`);
+    renderReminderCountdown();
+    generateReminders();
+    showToast('Reminder time saved', 'success');
+  }
+
+  function formatReminderTime(time) {
+    const [hours, minutes] = time.split(':').map(Number);
+    const probe = new Date();
+    probe.setHours(hours, minutes, 0, 0);
+    return probe.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  }
+
+  function updateReminderStatus(text) {
+    document.getElementById('reminder-status').textContent = text;
+  }
+
+  function sendReminderNotification(title, body) {
+    if (!('Notification' in window) || Notification.permission !== 'granted') return false;
+    try {
+      const notification = new Notification(title, { body, requireInteraction: true, tag: 'fitai-reminder', renotify: true });
+      notification.onclick = () => window.focus();
+      showToast(body, 'info');
+      return true;
+    } catch (err) {
+      console.error(err);
+      showToast(body, 'warning');
+      return false;
+    }
+  }
+
+  function getNextReminderDate() {
+    const time = document.getElementById('reminder-time').value || localStorage.getItem(REMINDER_TIME_KEY) || '19:00';
+    const [hours, minutes] = time.split(':').map(Number);
+    const next = new Date();
+    next.setHours(hours, minutes, 0, 0);
+    if (next <= new Date()) next.setDate(next.getDate() + 1);
+    return next;
+  }
+
+  function renderReminderCountdown() {
+    const next = getNextReminderDate();
+    const diffMs = Math.max(next - new Date(), 0);
+    const totalMinutes = Math.floor(diffMs / 60000);
+    const hours = Math.floor(totalMinutes / 60);
+    const minutes = totalMinutes % 60;
+    document.getElementById('reminder-countdown').textContent = `Next reminder: ${next.toLocaleDateString([], { month:'short', day:'numeric' })} ${next.toLocaleTimeString([], { hour:'2-digit', minute:'2-digit' })} (${hours}h ${minutes}m)`;
+  }
+
+  function startReminderClock() {
+    renderReminderCountdown();
+    if (reminderTicker) clearInterval(reminderTicker);
+    reminderTicker = setInterval(() => {
+      renderReminderCountdown();
+      maybeSendDailyReminder();
+    }, 15000);
+  }
+
+  function maybeSendDailyReminder() {
+    if (!('Notification' in window) || Notification.permission !== 'granted') return;
+    const time = document.getElementById('reminder-time').value || localStorage.getItem(REMINDER_TIME_KEY) || '19:00';
+    const now = new Date();
+    const today = now.toDateString();
+    const [hours, minutes] = time.split(':').map(Number);
+    const scheduled = new Date(now);
+    scheduled.setHours(hours, minutes, 0, 0);
+    const withinTriggerWindow = now - scheduled >= 0 && now - scheduled < 5 * 60 * 1000;
+    if (localStorage.getItem(REMINDER_SENT_KEY) !== today && withinTriggerWindow && localStorage.getItem(REMINDER_LAST_FIRE_KEY) !== today) {
+      const remaining = Math.max(waterData.goal - waterData.consumed, 0).toFixed(1);
+      sendReminderNotification('FitAI Reminder', waterData.consumed >= waterData.goal ? 'You already reached your water goal. Keep going.' : `Time to check in. You still need ${remaining}L to hit today's water goal.`);
+      localStorage.setItem(REMINDER_SENT_KEY, today);
+      localStorage.setItem(REMINDER_LAST_FIRE_KEY, today);
+      updateReminderStatus(`Reminder sent at ${now.toLocaleTimeString([], { hour:'2-digit', minute:'2-digit' })}. Next one is tomorrow.`);
+    }
+  }
+
+  function testReminderNow() {
+    if (!('Notification' in window)) {
+      showToast('Browser notifications not supported', 'warning');
+      return;
+    }
+    if (Notification.permission !== 'granted') {
+      showToast('Enable browser notifications first', 'warning');
+      return;
+    }
+    const remaining = Math.max(waterData.goal - waterData.consumed, 0).toFixed(1);
+    sendReminderNotification('FitAI Reminder Test', waterData.consumed >= waterData.goal ? 'Test successful. Your hydration goal is complete today.' : `Test successful. You currently need ${remaining}L more today.`);
+    showToast('Test reminder sent.', 'success');
+  }
+
+  function generateReminders() {
+    const reminders = [];
+    const reminderTime = document.getElementById('reminder-time').value || localStorage.getItem(REMINDER_TIME_KEY) || '19:00';
+    reminders.push({ text: `Daily reminder is scheduled for ${formatReminderTime(reminderTime)}.`, type: 'info' });
+    if (waterData.consumed < waterData.goal * 0.5 && new Date().getHours() > 14) reminders.push({ text: `Only ${waterData.consumed.toFixed(1)}L consumed. Need ${(waterData.goal - waterData.consumed).toFixed(1)}L more today.`, type: 'warning' });
+    if (waterData.consumed >= waterData.goal) reminders.push({ text: 'Water goal complete. Great hydration today.', type: 'success' });
+    document.getElementById('notif-list').innerHTML = reminders.length ? reminders.map(r => `<div class="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-300">${r.text}</div>`).join('') : '<div class="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-400">No active reminders right now.</div>';
+  }
+
+  function requestNotifPermission() {
+    if (!('Notification' in window)) {
+      showToast('Browser notifications not supported', 'warning');
+      return;
+    }
+    Notification.requestPermission().then(p => {
+      updateReminderStatus(p === 'granted' ? `Browser notifications enabled. Reminder will fire at ${formatReminderTime(document.getElementById('reminder-time').value || '19:00')}.` : 'Permission denied. Browser reminders will stay off.');
+      showToast(p === 'granted' ? 'Notifications enabled.' : 'Permission denied', p === 'granted' ? 'success' : 'warning');
+    });
+  }
+
+  window.addEventListener('load', () => {
+    loadWater();
+    calcBMI();
+    loadChecklist();
+    loadReminderTime();
+    generateReminders();
+    maybeSendDailyReminder();
+    startReminderClock();
+  });
+</script>
+{% endblock %}

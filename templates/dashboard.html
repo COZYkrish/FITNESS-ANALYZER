@@ -1,0 +1,471 @@
+{% extends "base_site.html" %}
+{% block title %}Dashboard | Kinetic Ether{% endblock %}
+{% block body_class %}page-dashboard{% endblock %}
+{% block head_extra %}
+<style>
+  #score-core.prediction-flash {
+    box-shadow: 0 0 0 1px rgba(103, 232, 249, 0.22), 0 0 40px rgba(103, 232, 249, 0.14), 0 32px 80px rgba(2, 6, 23, 0.48);
+  }
+</style>
+{% endblock %}
+{% block content %}
+<div class="dashboard-shell">
+<section class="page-hero" data-reveal>
+  <div class="hero-grid">
+    <div>
+      <div class="page-eyebrow">Realtime prediction lab</div>
+      <h1 class="page-title">The fitness command center.</h1>
+      <p class="page-copy">Keep the same prediction payload, scoring engine, planner, export, and save-to-progress flow, but present them as a premium reactive cockpit.</p>
+      <div class="mini-grid mt-8">
+        <div class="metric-panel" data-tilt>
+          <div class="metric-kicker">Core</div>
+          <div id="system-model-status" class="metric-value metric-value--cyan">Ready</div>
+        </div>
+        <div class="metric-panel" data-tilt>
+          <div class="metric-kicker">Latency</div>
+          <div id="system-latency" class="metric-value metric-value--amber">-- ms</div>
+        </div>
+        <div class="metric-panel" data-tilt>
+          <div class="metric-kicker">Signal</div>
+          <div id="system-signal-quality" class="metric-value metric-value--lime">Awaiting data</div>
+        </div>
+        <div class="metric-panel" data-tilt>
+          <div class="metric-kicker">Target gap</div>
+          <div id="system-target-gap" class="metric-value metric-value--rose">-- pts</div>
+        </div>
+      </div>
+    </div>
+    <div class="signal-scene signal-scene--dashboard" data-signal-scene data-reveal-delay="120">
+      <div class="signal-scene__ambient"></div>
+      <div class="signal-scene__grid"></div>
+      <div class="signal-dashboard__panel signal-dashboard__panel--rear"></div>
+      <div class="signal-dashboard__panel signal-dashboard__panel--main">
+        <div class="signal-dashboard__ring"></div>
+        <div class="signal-dashboard__line">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="signal-dashboard__bars">
+          <span></span><span></span><span></span><span></span>
+        </div>
+        <div class="signal-dashboard__chips">
+          <i></i><i></i><i></i>
+        </div>
+      </div>
+      <div class="signal-dashboard__scan"></div>
+      <div class="signal-scene__label signal-scene__label--a"><span>Predictive layer</span><strong>Realtime</strong></div>
+      <div class="signal-scene__label signal-scene__label--b"><span>Signal rails</span><strong>Live control</strong></div>
+    </div>
+  </div>
+</section>
+
+<section class="dashboard-matrix">
+  <div class="glass-card rounded-[2rem] p-6" data-reveal data-tilt>
+    <div class="text-xs uppercase tracking-[0.28em] text-slate-400">Input Parameters</div>
+    <div class="mt-6 space-y-6">
+      <div>
+        <div class="mb-2 flex justify-between text-sm"><span>Age</span><span id="age-val">30</span></div>
+        <input id="age" type="range" min="18" max="60" value="30" class="w-full accent-cyan-300" oninput="updateVal('age-val', this.value); debouncedPredict()">
+      </div>
+      <div>
+        <div class="mb-2 text-sm">Gender</div>
+        <div class="grid grid-cols-2 gap-3 toggle-group">
+          <button class="toggle-btn active rounded-2xl border border-white/10 px-4 py-3" data-field="Gender" data-value="male" onclick="setToggle(this)">Male</button>
+          <button class="toggle-btn rounded-2xl border border-white/10 px-4 py-3" data-field="Gender" data-value="female" onclick="setToggle(this)">Female</button>
+        </div>
+      </div>
+      <div>
+        <div class="mb-2 flex justify-between text-sm"><span>Weight</span><span id="weight-val">70</span></div>
+        <input id="weight" type="range" min="40" max="130" value="70" step="0.5" class="w-full accent-cyan-300" oninput="updateVal('weight-val', this.value); updateBMI(); debouncedPredict()">
+      </div>
+      <div>
+        <div class="mb-2 flex justify-between text-sm"><span>Height</span><span id="height-val">1.75</span></div>
+        <input id="height" type="range" min="1.5" max="2.1" value="1.75" step="0.01" class="w-full accent-cyan-300" oninput="updateVal('height-val', parseFloat(this.value).toFixed(2)); updateBMI(); debouncedPredict()">
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div>
+          <div class="mb-2 flex justify-between text-sm"><span>Max BPM</span><span id="max_bpm-val">175</span></div>
+          <input id="max_bpm" type="range" min="120" max="210" value="175" class="w-full accent-fuchsia-300" oninput="updateVal('max_bpm-val', this.value); debouncedPredict()">
+        </div>
+        <div>
+          <div class="mb-2 flex justify-between text-sm"><span>Avg BPM</span><span id="avg_bpm-val">140</span></div>
+          <input id="avg_bpm" type="range" min="80" max="180" value="140" class="w-full accent-fuchsia-300" oninput="updateVal('avg_bpm-val', this.value); debouncedPredict()">
+        </div>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div>
+          <div class="mb-2 flex justify-between text-sm"><span>Resting BPM</span><span id="resting_bpm-val">65</span></div>
+          <input id="resting_bpm" type="range" min="40" max="100" value="65" class="w-full accent-fuchsia-300" oninput="updateVal('resting_bpm-val', this.value); debouncedPredict()">
+        </div>
+        <div>
+          <div class="mb-2 flex justify-between text-sm"><span>Body Fat %</span><span id="fat_pct-val">20</span></div>
+          <input id="fat_pct" type="range" min="5" max="50" value="20" step="0.5" class="w-full accent-fuchsia-300" oninput="updateVal('fat_pct-val', this.value); debouncedPredict()">
+        </div>
+      </div>
+      <div>
+        <div class="mb-2 text-sm">Workout Type</div>
+        <div class="grid grid-cols-2 gap-3 toggle-group sm:grid-cols-4">
+          <button class="toggle-btn active rounded-2xl border border-white/10 px-4 py-3" data-field="Workout_Type" data-value="cardio" onclick="setToggle(this)">Cardio</button>
+          <button class="toggle-btn rounded-2xl border border-white/10 px-4 py-3" data-field="Workout_Type" data-value="strength" onclick="setToggle(this)">Strength</button>
+          <button class="toggle-btn rounded-2xl border border-white/10 px-4 py-3" data-field="Workout_Type" data-value="hiit" onclick="setToggle(this)">HIIT</button>
+          <button class="toggle-btn rounded-2xl border border-white/10 px-4 py-3" data-field="Workout_Type" data-value="yoga" onclick="setToggle(this)">Yoga</button>
+        </div>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div>
+          <div class="mb-2 flex justify-between text-sm"><span>Duration</span><span id="duration-val">1.00</span></div>
+          <input id="duration" type="range" min="0.25" max="3" value="1" step="0.05" class="w-full accent-lime-300" oninput="updateVal('duration-val', parseFloat(this.value).toFixed(2)); debouncedPredict()">
+        </div>
+        <div>
+          <div class="mb-2 flex justify-between text-sm"><span>Calories</span><span id="calories-val">600</span></div>
+          <input id="calories" type="range" min="100" max="2000" value="600" step="10" class="w-full accent-lime-300" oninput="updateVal('calories-val', this.value); debouncedPredict()">
+        </div>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div>
+          <div class="mb-2 flex justify-between text-sm"><span>Frequency</span><span id="freq-val">3</span></div>
+          <input id="freq" type="range" min="1" max="7" value="3" class="w-full accent-lime-300" oninput="updateVal('freq-val', this.value); debouncedPredict()">
+        </div>
+        <div>
+          <div class="mb-2 flex justify-between text-sm"><span>Water</span><span id="water-val">2.5</span></div>
+          <input id="water" type="range" min="0.5" max="5" value="2.5" step="0.1" class="w-full accent-lime-300" oninput="updateVal('water-val', parseFloat(this.value).toFixed(1)); debouncedPredict()">
+        </div>
+      </div>
+      <div>
+        <div class="mb-2 text-sm">Experience</div>
+        <div class="grid grid-cols-3 gap-3 toggle-group">
+          <button class="toggle-btn active rounded-2xl border border-white/10 px-4 py-3" data-field="Experience_Level" data-value="1" onclick="setToggle(this)">Beginner</button>
+          <button class="toggle-btn rounded-2xl border border-white/10 px-4 py-3" data-field="Experience_Level" data-value="2" onclick="setToggle(this)">Intermediate</button>
+          <button class="toggle-btn rounded-2xl border border-white/10 px-4 py-3" data-field="Experience_Level" data-value="3" onclick="setToggle(this)">Advanced</button>
+        </div>
+      </div>
+      <div class="rounded-3xl border border-white/10 bg-white/5 p-5">
+        <div class="text-xs uppercase tracking-[0.22em] text-slate-400">BMI</div>
+        <div id="bmi-display" class="mt-2 font-headline text-3xl font-bold text-cyan-200">22.9</div>
+      </div>
+      <div class="rounded-3xl border border-white/10 bg-white/5 p-5">
+        <div class="mb-2 flex items-center justify-between text-sm"><span>Target Practical Score</span><span id="goal-score-val">70</span></div>
+        <input id="goal-score" type="range" min="35" max="100" value="70" class="w-full accent-cyan-300" oninput="updateGoal(this.value)">
+        <div class="mt-4 h-2 rounded-full bg-white/10"><div id="goal-fill" class="h-2 rounded-full bg-cyan-300"></div></div>
+        <div id="goal-pct" class="mt-2 text-sm text-slate-400">0%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dashboard-stack">
+    <div id="score-core" class="glass-card rounded-[2rem] p-7" data-reveal data-tilt>
+      <div class="grid gap-6 lg:grid-cols-[240px_1fr] lg:items-center">
+        <div class="flex justify-center">
+          <div class="relative h-56 w-56">
+            <svg class="score-ring h-56 w-56" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="8"></circle>
+              <circle id="score-arc" cx="50" cy="50" r="40" fill="none" stroke="#67e8f9" stroke-width="8" stroke-linecap="round" stroke-dasharray="251.2" stroke-dashoffset="251.2"></circle>
+            </svg>
+            <div class="absolute inset-0 flex flex-col items-center justify-center">
+              <div id="score-number" class="font-headline text-5xl font-bold text-white">0.0</div>
+              <div id="score-badge" class="mt-2 rounded-full border border-white/10 px-3 py-1 text-xs uppercase tracking-[0.24em] text-cyan-200">-</div>
+            </div>
+          </div>
+        </div>
+        <div class="space-y-5">
+          <div class="grid gap-4 sm:grid-cols-3">
+            <div class="rounded-3xl border border-white/10 bg-white/5 p-4">
+              <div class="text-xs uppercase tracking-[0.22em] text-slate-400">Fitness Level</div>
+              <div id="result-level" class="mt-2 font-headline text-2xl font-bold">-</div>
+            </div>
+            <div class="rounded-3xl border border-white/10 bg-white/5 p-4">
+              <div class="text-xs uppercase tracking-[0.22em] text-slate-400">Lifestyle</div>
+              <div id="result-lifestyle" class="mt-2 font-headline text-2xl font-bold">-</div>
+            </div>
+            <div class="rounded-3xl border border-white/10 bg-white/5 p-4">
+              <div class="text-xs uppercase tracking-[0.22em] text-slate-400">Reliability</div>
+              <div id="result-reliability" class="mt-2 font-headline text-lg font-bold">-</div>
+            </div>
+          </div>
+          <p id="score-context" class="text-sm leading-7 text-slate-300">Run a prediction to populate score context.</p>
+          <div class="grid gap-4 md:grid-cols-4">
+            <div class="rounded-3xl border border-white/10 bg-white/5 p-4"><div class="text-xs uppercase tracking-[0.22em] text-slate-400">Current</div><div id="compare-current" class="mt-2 font-headline text-2xl font-bold">0.0</div></div>
+            <div class="rounded-3xl border border-white/10 bg-white/5 p-4"><div class="text-xs uppercase tracking-[0.22em] text-slate-400">Target</div><div id="compare-target" class="mt-2 font-headline text-2xl font-bold">70.0</div></div>
+            <div class="rounded-3xl border border-white/10 bg-white/5 p-4"><div class="text-xs uppercase tracking-[0.22em] text-slate-400">Gap</div><div id="compare-gap" class="mt-2 font-headline text-2xl font-bold">0.0</div></div>
+            <div class="rounded-3xl border border-white/10 bg-white/5 p-4"><div class="text-xs uppercase tracking-[0.22em] text-slate-400">Fastest ETA</div><div id="compare-impact" class="mt-2 font-headline text-lg font-bold">--</div></div>
+          </div>
+          <div class="flex flex-wrap gap-3">
+            <button onclick="exportReport()" class="rounded-2xl border border-cyan-400/30 px-5 py-3 text-sm uppercase tracking-[0.24em] text-cyan-200">Export Report</button>
+            <button onclick="saveToProgress()" class="rounded-2xl border border-fuchsia-400/30 px-5 py-3 text-sm uppercase tracking-[0.24em] text-fuchsia-200">Save To Progress</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid gap-6 lg:grid-cols-2">
+      <div class="glass-card rounded-[2rem] p-6" data-reveal data-scroll-card data-tilt>
+        <div class="flex items-center justify-between">
+          <h2 class="font-headline text-2xl font-bold">AI Suggestions</h2>
+          <span id="suggestion-count" class="text-sm text-slate-400">0</span>
+        </div>
+        <div id="suggestions-list" class="mt-5 space-y-3"></div>
+      </div>
+      <div class="glass-card rounded-[2rem] p-6" data-reveal data-scroll-card data-tilt>
+        <div class="flex items-center justify-between">
+          <h2 class="font-headline text-2xl font-bold">Input Quality</h2>
+          <span id="validation-count" class="text-sm text-slate-400">0</span>
+        </div>
+        <div id="validation-list" class="mt-5 space-y-3"></div>
+      </div>
+      <div class="glass-card rounded-[2rem] p-6" data-reveal data-scroll-card data-tilt>
+        <div class="flex items-center justify-between">
+          <h2 class="font-headline text-2xl font-bold">Goal Planner</h2>
+          <span id="planner-count" class="text-sm text-slate-400">0</span>
+        </div>
+        <p id="planner-summary" class="mt-4 text-sm leading-7 text-slate-300"></p>
+        <div id="planner-list" class="mt-5 space-y-3"></div>
+      </div>
+      <div class="glass-card rounded-[2rem] p-6" data-reveal data-scroll-card data-tilt>
+        <h2 class="font-headline text-2xl font-bold">Opportunity Chart</h2>
+        <div class="mt-5 h-80"><canvas id="featureChart"></canvas></div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+{% endblock %}
+{% block page_scripts %}
+<script>
+  let featureChart = null;
+  let currentResult = null;
+  let lastPredictStartedAt = 0;
+  const formState = { Gender: 'male', Workout_Type: 'cardio', Experience_Level: '1' };
+
+  function setSystemStatus(status, quality = null) {
+    document.getElementById('system-model-status').textContent = status;
+    if (quality) document.getElementById('system-signal-quality').textContent = quality;
+  }
+
+  function flashPredictionCore() {
+    const core = document.getElementById('score-core');
+    core.classList.add('ring-2', 'ring-cyan-300/50');
+    setTimeout(() => core.classList.remove('ring-2', 'ring-cyan-300/50'), 450);
+  }
+
+  function updateVal(id, val) { document.getElementById(id).textContent = val; }
+
+  function setToggle(btn) {
+    const group = btn.closest('.toggle-group');
+    group.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    formState[btn.dataset.field] = btn.dataset.value;
+    debouncedPredict();
+  }
+
+  function updateBMI() {
+    const w = parseFloat(document.getElementById('weight').value);
+    const h = parseFloat(document.getElementById('height').value);
+    const bmi = (w / (h * h)).toFixed(2);
+    document.getElementById('bmi-display').textContent = bmi;
+    return bmi;
+  }
+
+  function getFormData() {
+    return {
+      'Age': parseFloat(document.getElementById('age').value),
+      'Gender': formState.Gender,
+      'Weight (kg)': parseFloat(document.getElementById('weight').value),
+      'Height (m)': parseFloat(document.getElementById('height').value),
+      'Max_BPM': parseFloat(document.getElementById('max_bpm').value),
+      'Avg_BPM': parseFloat(document.getElementById('avg_bpm').value),
+      'Resting_BPM': parseFloat(document.getElementById('resting_bpm').value),
+      'Session_Duration (hours)': parseFloat(document.getElementById('duration').value),
+      'Calories_Burned': parseFloat(document.getElementById('calories').value),
+      'Workout_Type': formState.Workout_Type,
+      'Fat_Percentage': parseFloat(document.getElementById('fat_pct').value),
+      'Water_Intake (liters)': parseFloat(document.getElementById('water').value),
+      'Workout_Frequency (days/week)': parseFloat(document.getElementById('freq').value),
+      'Experience_Level': parseFloat(formState.Experience_Level),
+      'BMI': parseFloat(updateBMI())
+    };
+  }
+
+  function updateGoal(val) {
+    document.getElementById('goal-score-val').textContent = val;
+    document.getElementById('compare-target').textContent = parseFloat(val).toFixed(1);
+    updateGoalProgress();
+    debouncedPredict();
+  }
+
+  function updateGoalProgress() {
+    const goal = parseFloat(document.getElementById('goal-score').value);
+    const current = currentResult ? currentResult.practical_score : 0;
+    const pct = Math.min((current / goal) * 100, 100).toFixed(0);
+    document.getElementById('goal-fill').style.width = pct + '%';
+    document.getElementById('goal-pct').textContent = pct + '%';
+  }
+
+  async function predict() {
+    const data = getFormData();
+    data.Target_Practical_Score = parseFloat(document.getElementById('goal-score').value);
+    lastPredictStartedAt = performance.now();
+    setSystemStatus('Predicting...');
+    try {
+      const res = await fetch('/predict', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      const result = await res.json();
+      if (result.error) {
+        setSystemStatus('Input Error', 'Check values');
+        showToast('Prediction failed. Check your inputs.', 'warning');
+        return;
+      }
+      currentResult = result;
+      displayResult(result);
+    } catch (error) {
+      console.error(error);
+      setSystemStatus('Offline', 'Network unavailable');
+      showToast('Network error while loading prediction.', 'warning');
+    }
+  }
+
+  function displayResult(r) {
+    const score = r.practical_score;
+    const latency = Math.max(Math.round(performance.now() - lastPredictStartedAt), 1);
+    const warningCount = r.validation_messages.filter(item => item.type !== 'success').length;
+    setSystemStatus('Synchronized', warningCount === 0 ? 'Clean signal' : `${warningCount} checks flagged`);
+    document.getElementById('system-latency').textContent = `${latency} ms`;
+    document.getElementById('system-target-gap').textContent = `${r.goal_planner.gap_to_target.toFixed(1)} pts`;
+    document.getElementById('compare-current').textContent = score.toFixed(1);
+    document.getElementById('compare-target').textContent = r.goal_planner.target_practical_score.toFixed(1);
+    document.getElementById('compare-gap').textContent = r.goal_planner.gap_to_target.toFixed(1);
+    document.getElementById('compare-impact').textContent = (r.goal_planner.recommended_actions[0] || {}).eta || '--';
+    animateCount(document.getElementById('score-number'), score, 900, 1);
+    document.getElementById('score-badge').textContent = r.score_context.band;
+    document.getElementById('score-context').textContent = `Raw model score ${r.fitness_score.toFixed(1)} with model class ${r.fitness_level}. ${r.score_context.summary}`;
+    document.getElementById('result-level').textContent = r.fitness_level;
+    document.getElementById('result-lifestyle').textContent = r.lifestyle;
+    document.getElementById('result-reliability').textContent = `${r.reliability.label} (${r.reliability.score.toFixed(1)}%)`;
+    document.getElementById('score-arc').style.strokeDashoffset = 251.2 - (score / 100) * 251.2;
+    updateGoalProgress();
+    flashPredictionCore();
+    renderPlanner(r.goal_planner);
+    renderValidation(r.validation_messages, r.metric_feedback);
+    renderSuggestions(r.suggestions);
+    renderFeatureChart(r.opportunity_chart.map(item => item.label), r.opportunity_chart.map(item => item.gain));
+  }
+
+  function renderCardList(listId, items, emptyText) {
+    const list = document.getElementById(listId);
+    if (!items.length) {
+      list.innerHTML = `<div class="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-slate-300">${emptyText}</div>`;
+      return;
+    }
+    list.innerHTML = items.map(item => `<div class="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm leading-7 text-slate-200">${item}</div>`).join('');
+  }
+
+  function renderSuggestions(suggestions) {
+    document.getElementById('suggestion-count').textContent = suggestions.length;
+    renderCardList('suggestions-list', suggestions.map(s => `<span class="font-semibold text-cyan-200">${s.icon}</span> ${s.text}`), 'Your metrics look stable.');
+  }
+
+  function renderPlanner(planner) {
+    const actions = planner.recommended_actions || [];
+    document.getElementById('planner-count').textContent = actions.length;
+    document.getElementById('planner-summary').textContent = planner.gap_to_target <= 0
+      ? `You are already at or above the selected target of ${planner.target_practical_score.toFixed(1)}.`
+      : `${planner.current_practical_score.toFixed(1)} to ${planner.target_practical_score.toFixed(1)} requires ${planner.gap_to_target.toFixed(1)} practical points.`;
+    renderCardList('planner-list', actions.map(action => `<strong>${action.title}</strong><br>${action.action}<br><span class="text-slate-400">Now ${action.current} -> ${action.target} | ${action.eta} | ${action.difficulty} | +${action.estimated_gain.toFixed(1)} pts</span>`), 'No obvious near-term changes identified.');
+  }
+
+  function renderValidation(messages, feedback) {
+    const allItems = [...messages, ...feedback.map(item => ({ text: `${item.label}: ${item.value}`, icon: item.label }))];
+    document.getElementById('validation-count').textContent = allItems.length;
+    renderCardList('validation-list', allItems.map(item => `<span class="font-semibold text-fuchsia-200">${item.icon}</span> ${item.text}`), 'Inputs look internally consistent.');
+  }
+
+  function renderFeatureChart(labels, values) {
+    const ctx = document.getElementById('featureChart').getContext('2d');
+    if (featureChart) featureChart.destroy();
+    featureChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [{
+          data: values,
+          backgroundColor: values.map((_, i) => `hsla(${180 - i * 18}, 85%, 58%, 0.72)`),
+          borderRadius: 6
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } },
+          y: { grid: { display: false }, ticks: { color: '#e2e8f0' } }
+        }
+      }
+    });
+  }
+
+  function exportReport() {
+    if (!currentResult) { showToast('Run a prediction first.', 'warning'); return; }
+    const d = getFormData();
+    const r = currentResult;
+    const content = `
+FITNESS HABIT ANALYZER REPORT
+Date: ${new Date().toLocaleDateString()}
+
+Practical Score: ${r.practical_score.toFixed(1)}
+Raw Model Score: ${r.fitness_score.toFixed(1)}
+Fitness Level: ${r.fitness_level}
+Lifestyle Type: ${r.lifestyle}
+
+Age: ${d['Age']}
+Gender: ${d['Gender']}
+Weight: ${d['Weight (kg)']} kg
+Height: ${d['Height (m)']} m
+BMI: ${d['BMI']}
+Workout Type: ${d['Workout_Type']}
+Duration: ${d['Session_Duration (hours)']} hrs
+Calories: ${d['Calories_Burned']} kcal
+Water: ${d['Water_Intake (liters)']} L/day
+
+Suggestions:
+${r.suggestions.map(s => `- ${s.text}`).join('\n')}
+    `.trim();
+    const blob = new Blob([content], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'fitness_report.txt';
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('Report downloaded.', 'success');
+  }
+
+  function saveToProgress() {
+    if (!currentResult) { showToast('Run a prediction first.', 'warning'); return; }
+    const history = JSON.parse(localStorage.getItem('fitai_progress') || '[]');
+    history.push({
+      date: new Date().toISOString(),
+      score: currentResult.fitness_score,
+      practicalScore: currentResult.practical_score,
+      level: currentResult.fitness_level,
+      lifestyle: currentResult.lifestyle,
+      targetPracticalScore: currentResult.goal_planner.target_practical_score,
+      reliability: currentResult.reliability.label,
+      inputs: getFormData(),
+      validation: currentResult.validation_messages
+    });
+    localStorage.setItem('fitai_progress', JSON.stringify(history));
+    showToast('Saved to progress tracker.', 'success');
+  }
+
+  const debouncedPredict = debounce(predict, 400);
+
+  window.addEventListener('load', () => {
+    updateBMI();
+    updateGoal(document.getElementById('goal-score').value);
+    predict();
+  });
+</script>
+{% endblock %}
