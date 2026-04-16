@@ -147,8 +147,8 @@ class PredictionService:
 
     @staticmethod
     # def build_metric_feedback(data: dict[str, Any]) -> list[dict[str, str]]:
-    #     feedback: list[dict[str, str]] = []
-    #     resting_bpm = float(data.get("Resting_BPM", 0))
+        feedback: list[dict[str, str]] = []
+        resting_bpm = float(data.get("Resting_BPM", 0))
         water = float(data.get("Water_Intake (liters)", 0))
         freq = float(data.get("Workout_Frequency (days/week)", 0))
         bmi = float(data.get("BMI", 0))
