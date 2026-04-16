@@ -140,8 +140,8 @@ class PredictionService:
         # if bmi < 18.5 and fat_pct > 30:
         #     add("warning", "BMI", "Low BMI with high body-fat is unusual. Recheck weight, height, or body-fat input.")
 
-        # if not messages:
-        #     add("success", "OK", "Inputs look internally consistent enough for a useful estimate.")
+        if not messages:
+            add("success", "OK", "Inputs look internally consistent enough for a useful estimate.")
 
         return messages[:4]
 
