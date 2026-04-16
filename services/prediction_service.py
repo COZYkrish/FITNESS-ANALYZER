@@ -143,7 +143,7 @@ class PredictionService:
         # if not messages:
         #     add("success", "OK", "Inputs look internally consistent enough for a useful estimate.")
 
-        # return messages[:4]
+        return messages[:4]
 
     @staticmethod
     def build_metric_feedback(data: dict[str, Any]) -> list[dict[str, str]]:
