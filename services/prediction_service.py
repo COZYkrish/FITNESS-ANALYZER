@@ -137,8 +137,8 @@ class PredictionService:
             add("info", "Load", "Training load is very high. Add recovery days so the plan stays realistic.")
         if experience >= 3 and freq <= 2:
             add("info", "Lvl", "Advanced experience with low weekly frequency is possible, but it usually undercuts the label.")
-        # if bmi < 18.5 and fat_pct > 30:
-        #     add("warning", "BMI", "Low BMI with high body-fat is unusual. Recheck weight, height, or body-fat input.")
+        if bmi < 18.5 and fat_pct > 30:
+            add("warning", "BMI", "Low BMI with high body-fat is unusual. Recheck weight, height, or body-fat input.")
 
         if not messages:
             add("success", "OK", "Inputs look internally consistent enough for a useful estimate.")
