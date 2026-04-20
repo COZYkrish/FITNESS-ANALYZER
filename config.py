@@ -29,10 +29,10 @@ WORKOUT_MAP = {"cardio": 0, "strength": 1, "yoga": 2, "hiit": 3}
 
 NUMERIC_INPUT_SPECS = {
     "Age": (18, 100),
-    # "Weight (kg)": (30, 250),
-    # "Height (m)": (1.2, 2.4),
-    # "Max_BPM": (80, 240),
-    # "Avg_BPM": (40, 220),
+    "Weight (kg)": (30, 250),
+    "Height (m)": (1.2, 2.4),
+    "Max_BPM": (80, 240),
+    "Avg_BPM": (40, 220),
     "Resting_BPM": (30, 130),
     "Session_Duration (hours)": (0.1, 6.0),
     "Calories_Burned": (0, 4000),
