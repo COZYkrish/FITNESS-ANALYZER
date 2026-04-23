@@ -98,11 +98,11 @@ http://127.0.0.1:5000
 
 ## 📦 Core Functionality
 
-<!-- ### 🎯 Prediction Flow
+### 🎯 Prediction Flow
 - Collect user fitness and health inputs from the dashboard
 - Send them to `/predict`
 - Return prediction, level, lifestyle, planner output, reliability, suggestions, and validation messages
-- Render the response live in the UI -->
+- Render the response live in the UI
 
 ### 📈 Progress Tracking
 - Saves dashboard snapshots into `fitai_progress`
