@@ -94,9 +94,18 @@
     <article class="glass-card rounded-[2rem] p-7 xl:col-span-4" data-reveal data-tilt>
       <h2 class="font-headline text-2xl font-bold">BMI Calculator</h2>
       <div class="mt-6 grid gap-4 sm:grid-cols-3">
-        <input id="bmi-weight" type="number" value="70" min="30" max="200" step="0.5" class="rounded-2xl border border-white/10 bg-white/5 text-slate-100" oninput="calcBMI()">
-        <input id="bmi-height" type="number" value="175" min="100" max="220" class="rounded-2xl border border-white/10 bg-white/5 text-slate-100" oninput="calcBMI()">
-        <input id="bmi-age" type="number" value="30" min="10" max="100" class="rounded-2xl border border-white/10 bg-white/5 text-slate-100" oninput="calcBMI()">
+        <div class="flex flex-col gap-1.5">
+          <label for="bmi-weight" class="text-xs font-semibold uppercase tracking-wider text-slate-400">Weight (kg)</label>
+          <input id="bmi-weight" type="number" value="70" min="30" max="200" step="0.5" class="rounded-2xl border border-white/10 bg-white/5 text-slate-100" oninput="calcBMI()">
+        </div>
+        <div class="flex flex-col gap-1.5">
+          <label for="bmi-height" class="text-xs font-semibold uppercase tracking-wider text-slate-400">Height (cm)</label>
+          <input id="bmi-height" type="number" value="175" min="100" max="220" class="rounded-2xl border border-white/10 bg-white/5 text-slate-100" oninput="calcBMI()">
+        </div>
+        <div class="flex flex-col gap-1.5">
+          <label for="bmi-age" class="text-xs font-semibold uppercase tracking-wider text-slate-400">Age (years)</label>
+          <input id="bmi-age" type="number" value="30" min="10" max="100" class="rounded-2xl border border-white/10 bg-white/5 text-slate-100" oninput="calcBMI()">
+        </div>
       </div>
       <div class="mt-6 rounded-3xl border border-white/10 bg-white/5 p-6 text-center">
         <div id="bmi-number" class="font-headline text-5xl font-bold text-cyan-200">22.9</div>
